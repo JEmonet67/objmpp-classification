@@ -11,9 +11,11 @@ from skimage import img_as_ubyte
 
 
 def estim(ordre1,ordre2,nombre,est):
-    
+    # print("Moyenne :", ordre1)
+    # print("Var :", ordre2)
+    # print("Num :", nombre)
     if est==1:
-        x_max = 1
+        x_max = 0
         y_max = nombre[0]
     #Peut-être mettre 0 au lieu de 1 ici.
     
@@ -38,6 +40,7 @@ def estim(ordre1,ordre2,nombre,est):
                 somme = somme + nombre[x]
         
         varcond = varcond/somme
+    #print(varcond)
     return float(varcond)
 
 
@@ -59,25 +62,25 @@ def VarCond(dep,taille,est):
     # Calcul de la moyenne des voisins en chaque point
     dep = np.array(np.around(dep,2), dtype="int64")
     
-    for i in range(1,dim[0]-2):
-        for j in range(1,dim[1]-2):
-            voisin[i,j] = 1 + (dep[i-1,j]+dep[i+1,j]+dep[i,j-1]+dep[i,j+1])/4
+    for i in range(1,dim[0]-1):
+        for j in range(1,dim[1]-1):
+            voisin[i,j] = (dep[i-1,j]+dep[i+1,j]+dep[i,j-1]+dep[i,j+1])/4
             # +1 pour passer de [0,255] à [1,256]
     
-    voisin[0,0] = 1 + (dep[1,0]+dep[0,1])/2
-    for j in range(1,dim[1]-2):
-        voisin[0,j] = 1 + (dep[0,j-1]+dep[0,j+1]+dep[i+1,j])/3
+    voisin[0,0] = (dep[1,0]+dep[0,1])/2
+    for j in range(1,dim[1]-1):
+        voisin[0,j] = (dep[0,j-1]+dep[0,j+1]+dep[i+1,j])/3
     
-    voisin[0,dim[1]-1] = 1 + (dep[0,dim[1]-2]+dep[1,dim[1]-1])/2
-    for i in range(1,dim[0]-2):
-        voisin[i,0] = 1 + (dep[i-1,0]+dep[i+1,0]+dep[i,1])/3
-        voisin[i,dim[1]-1] = 1 + (dep[i-1,dim[1]-1]+dep[i+1,dim[1]-1] + dep[i,dim[1]-2])/3
+    voisin[0,dim[1]-1] = (dep[0,dim[1]-2]+dep[1,dim[1]-1])/2
+    for i in range(1,dim[0]-1):
+        voisin[i,0] = (dep[i-1,0]+dep[i+1,0]+dep[i,1])/3
+        voisin[i,dim[1]-1] = (dep[i-1,dim[1]-1]+dep[i+1,dim[1]-1] + dep[i,dim[1]-2])/3
     
-    voisin[dim[0]-1,0] = 1 + (dep[dim[0]-2,0]+dep[dim[0]-1,1])/2
-    for j in range(1,dim[1]-2):
-        voisin[dim[0]-1,j] = 1 + (dep[dim[0]-1,j-1]+dep[dim[0]-1,j+1]+dep[dim[0]-2,j])/3
+    voisin[dim[0]-1,0] = (dep[dim[0]-2,0]+dep[dim[0]-1,1])/2
+    for j in range(1,dim[1]-1):
+        voisin[dim[0]-1,j] = (dep[dim[0]-1,j-1]+dep[dim[0]-1,j+1]+dep[dim[0]-2,j])/3
     
-    voisin[dim[0]-1,dim[1]-1] = 1 + (dep[dim[0]-1,dim[1]-2]+ dep[dim[0]-2,dim[1]-2])/2
+    voisin[dim[0]-1,dim[1]-1] = (dep[dim[0]-1,dim[1]-2]+ dep[dim[0]-2,dim[1]-2])/2
         
     for i in range(0,dim[0]):
         print("Initialisation it",i)
