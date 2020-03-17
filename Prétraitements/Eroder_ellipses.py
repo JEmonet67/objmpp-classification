@@ -11,8 +11,8 @@ from os.path import isfile, join
 
 def erode_ellipses(path_file, path_output):
     list_img = [f for f in listdir(path_file) if isfile(join(path_file, f))]
-    n_img = 1
-    somme = np.zeros([2048,2048])
+    dim = plt.imread(f"{path_file}/{list_img[0]}").shape
+    somme = np.zeros([dim[0],dim[1]])
     
     for fichier in list_img:
         img_ellipse = plt.imread(f"{path_file}/{fichier}")
