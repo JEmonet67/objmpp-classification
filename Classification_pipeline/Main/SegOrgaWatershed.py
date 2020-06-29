@@ -126,7 +126,8 @@ def Seq_Water_meth2(path_image,path_ells,path_ells_érodées,path_output,it):
     plt.savefig(f"{path_output}/Segmentation_méthode_2.png")
     plt.close()
     labels_norm = cv.normalize(labels, np.zeros(labels.shape),0, 255, cv.NORM_MINMAX)
-    io.imwrite(path_output + "/Labels_méthode_2.png",np.uint8(labels_norm))
+    labels = np.uint8(labels_norm)
+    io.imwrite(path_output + "/Labels_méthode_2.png",labels)
     
     
     return labels

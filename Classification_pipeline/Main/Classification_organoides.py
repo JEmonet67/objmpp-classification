@@ -13,6 +13,7 @@ from skimage import img_as_ubyte
 from decimal import Decimal
 import cv2 as cv
 from PIL import Image
+import pickle
 
 def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_ells,k):
     print("Début de l'algorithme.")
@@ -73,9 +74,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
     #Début des itérations sur les images.
     while n_img <= n:
         print("Ellipse numéro", n_img, "en cours de traitement.")
-        # img_ellipse = np.load(f"{path_output}/local_map_{n_img}.npy")
-        # img_ellipse_norm = cv.normalize(list_dm_obj[n_img-1], np.zeros(list_dm_obj[n_img-1].shape),0, 255, cv.NORM_MINMAX)
-        # img_ellipse = np.uint8(img_ellipse_norm)
         img_ellipse = list_dm_obj[n_img-1]
         max_img = np.max(img_ellipse)
         
@@ -296,9 +294,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
     number = [n_compact,n_cystique,n_dechet]
     excel_writing(dict_mean, dict_std, number, path_output)
     
-    check_profiling = True
-    
-    return check_profiling
+
     
     
 
@@ -385,12 +381,14 @@ def frange(start, stop, step):
         start += Decimal(step)
 
 
-#Attributions des 4 variables nécessaires à la fonction (test).
-path_output_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/Test_Results/Img_marker_watershed_segmentation/local_map"
-path_csv_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/UBTD1-03_w24-DAPI_TIF-marks-2020y06m09d14h48m55s317l.csv"
-path_image_t = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video/UBTD1-03_w24-DAPI.TIF"
-path_glob_ells_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/UBTD1-03_w24-DAPI_TIF-ellipse-2020y06m09d14h48m55s317l.png"
-k_t = 20
+# #Attributions des 4 variables nécessaires à la fonction (test).
+# f = open('/home/jerome/Bureau/Test/local_map_UBTD1-08_w24-DAPI_TIF_2020y06m11d22h35m36s208l/local_map_watershed/Liste_dist_map_objets.txt',"rb")
+# list_dm_obj_t = pickle.Unpickler(f).load()
+# path_output_t = "/home/jerome/Bureau/Test/local_map_UBTD1-11_w24-DAPI_TIF_2020y06m12d18h07m31s730l"
+# path_csv_t = "/home/jerome/Bureau/Test/UBTD1-08_w24-DAPI_TIF-marks-2020y06m11d22h35m36s208l.csv"
+# path_image_t = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video/UBTD1-08_w24-DAPI.TIF"
+# path_glob_ells_t = "/home/jerome/Bureau/Test/UBTD1-08_w24-DAPI_TIF-ellipse-2020y06m11d22h35m36s208l.png"
+# k_t = 20
 
-#Lancement de la fonction (test).
-#intensity_profiling(path_output_t,path_csv_t,path_image_t,path_glob_ells_t,k_t)
+# #Lancement de la fonction (test).
+# intensity_profiling(list_dm_obj_t,path_output_t,path_csv_t,path_image_t,path_glob_ells_t,k_t)

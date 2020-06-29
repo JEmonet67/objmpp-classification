@@ -4,14 +4,13 @@
 
 import numpy as np
 import imageio as io
-from skimage import img_as_ubyte
 from os import listdir
 from os.path import splitext
 from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
-from scipy.ndimage.morphology import distance_transform_edt
 import cv2 as cv
+import pickle
 
 #Code pour binariser, éroder et fusionner les map des distances des objets.
 def Erode_ellipses(path_file):
@@ -29,8 +28,8 @@ def Erode_ellipses(path_file):
     return All_ell_erod
     
 
-path_file_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l"
-#Erode_ellipses(path_file_t)
+# path_file_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l"
+# Erode_ellipses(path_file_t)
 
 #Code pour binariser une image des régions.
 def Binaryze_ellipses(path_regions):
@@ -65,11 +64,11 @@ def Separate_ellipses(regions, path_csv):
     
 
 
-path_output_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/Test_Results/Img_marker_watershed_segmentation"
-path_csv_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/UBTD1-03_w24-DAPI_TIF-marks-2020y06m09d14h48m55s317l.csv"
-path_regions_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/Test_Results/Labels_méthode_2.png"
+# path_output_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/Test_Results/Img_marker_watershed_segmentation"
+# path_csv_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/UBTD1-03_w24-DAPI_TIF-marks-2020y06m09d14h48m55s317l.csv"
+# path_regions_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/Test_Results/Labels_méthode_2.png"
 
-#Separate_ellipses(path_output_t,path_regions_t,path_csv_t)
+# Separate_ellipses(path_output_t,path_regions_t,path_csv_t)
 
 
 #Code pour créer une map de distance à partir d'un objet.
@@ -77,15 +76,24 @@ def Distance_map(path_file,list_obj):
     n_obj = 1
     list_dm_obj = []
     for obj in list_obj:
-        dm_obj = distance_transform_edt(obj)
-        list_dm_obj = list_dm_obj + [dm_obj]
-        #np.save(f"{path_file}/local_map_watersh_{n_obj}.npy",dm_obj)
+        obj_norm = cv.normalize(obj, np.zeros(obj.shape),0, 255, cv.NORM_MINMAX)
+        obj_int8 = np.uint8(obj_norm)
+        dm_obj = cv.distanceTransform(obj_int8, cv.DIST_L2, 3)
         dm_obj_norm = cv.normalize(dm_obj, np.zeros(dm_obj.shape),0, 255, cv.NORM_MINMAX)
-        io.imwrite(f"{path_file}/local_map_watersh_{n_obj}.png",np.uint8(dm_obj_norm))
+        dm_obj_int8 = np.uint8(dm_obj_norm)
+        list_dm_obj = list_dm_obj + [dm_obj_int8]
+        io.imwrite(f"{path_file}/local_map_watersh_{n_obj}.png",dm_obj_int8)
         n_obj += 1
-    
     return list_dm_obj
 
-path_file_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/Test_Results/Img_marker_watershed_segmentation"
-#Distance_map(path_file_t)
+# # check=False
+# path_file_1 = "/home/jerome/Bureau/Img"
+# fi1 = open('/home/jerome/Bureau/Test/local_map_UBTD1-01_w24-DAPI_TIF_2020y06m09d13h45m26s565l/local_map_watershed/Liste_regions_objets.txt','rb')
+# list_obj_1 = pickle.Unpickler(fi1).load()
+# liste, check = Distance_map(path_file_1,list_obj_1)
 
+# if check == True:
+#     path_file_2 = "/home/jerome/Bureau/Img"
+#     fi2 = open('/home/jerome/Bureau/Test/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/local_map_watershed/Liste_regions_objets.txt','rb')
+#     list_obj_2 = pickle.Unpickler(fi2).load()
+#     Distance_map(path_file_2,list_obj_2)
