@@ -1,0 +1,11 @@
+click
+numpy
+pathlib
+matplotlib
+pandas
+imageio
+skimage
+decimal
+cv2
+PIL
+scipy
