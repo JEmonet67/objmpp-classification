@@ -1,8 +1,12 @@
+![Version](https://img.shields.io/pypi/v/objmpp-classification)![Upload Python Package](https://github.com/JEmonet67/objmpp-classification/workflows/Upload%20Python%20Package/badge.svg)
+
 ## Install package
 
 ```bash
 pip install objmpp-classification
 ```
+
+Pypi link : https://pypi.org/project/objmpp-classification/
 
 ## Run package
 
