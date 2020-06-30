@@ -1,8 +1,8 @@
 """Written by Jérôme Emonet"""
 
-from Main.SegOrgaWatershed import *
-from Main.Classification_organoides import *
-from Main.Traitements_objet import *
+from main.seg_orga_watershed import *
+from main.classification_organoides import *
+from main.traitements_objet import *
 import pickle
 import re
 import click
