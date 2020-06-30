@@ -2,4 +2,4 @@ build/
 *.egg-info
 .eggs/
 dist/
-_pycache_
+__pycache__/
