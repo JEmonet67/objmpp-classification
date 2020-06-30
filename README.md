@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/pypi/v/objmpp-classification)![Upload Python Package](https://github.com/JEmonet67/objmpp-classification/workflows/Upload%20Python%20Package/badge.svg)
+[![Version](https://img.shields.io/pypi/v/objmpp-classification)](https://pypi.org/project/objmpp-classification) [![Upload Python Package](https://github.com/JEmonet67/objmpp-classification/workflows/Upload%20Python%20Package/badge.svg)](https://github.com/MaastrichtU-IDS/d2s-cli/actions?query=workflow%3A%22Test+and+publish+package%22)
 
 ## Install package
 
@@ -6,7 +6,7 @@
 pip install objmpp-classification
 ```
 
-Pypi link : https://pypi.org/project/objmpp-classification/
+> PyPI link : https://pypi.org/project/objmpp-classification
 
 ## Run package
 
