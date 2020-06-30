@@ -5,17 +5,10 @@ from objmpp_classification.main.classification_organoides import *
 from objmpp_classification.main.traitements_objet import *
 import pickle
 import re
-import click
 
-@click.group()
-def organoid():
-    pass
 
-@click.command()
-@click.argument('path_data')
-@click.argument('path_images')
-@click.option('--debug', is_flag=True, help="Will print verbose messages.")
 def organoid_classification(path_data, path_images, debug=False):
+	"""Run Organoid classification from obj.MPP output"""
 
 	#Initialisation.
 	# path_data = input("Entrez le chemin du dossier contenant les données à traiter : ")
@@ -78,7 +71,6 @@ def organoid_classification(path_data, path_images, debug=False):
 			intensity_profiling(list_dm_obj,path_local_map,path_csv,path_img,path_ellipse,20)
 			
 				
-
 		#depickler = pickle.Unpickler(file).load()
 
 		#np_img = np.array(Image.open(path_img))

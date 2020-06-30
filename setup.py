@@ -20,11 +20,12 @@ setup(
     package_dir={'objmpp_classification': 'objmpp_classification'},
     entry_points={
         'console_scripts': [
-            'objmpp-classification=objmpp_classification.organoid_classification:organoid_classification',
+            'objmpp-classification=objmpp_classification.__main__:cli',
         ],
     },
 
-    python_requires='>=3.7.6',
+    # python_requires='>=3.7.6',
+    python_requires='>=3.6.0',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     include_package_data=True,
