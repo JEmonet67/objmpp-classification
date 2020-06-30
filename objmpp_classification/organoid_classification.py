@@ -7,6 +7,10 @@ import pickle
 import re
 import click
 
+@click.group()
+def organoid():
+    pass
+
 @click.command()
 @click.argument('path_data')
 @click.argument('path_images')

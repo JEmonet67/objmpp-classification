@@ -20,7 +20,7 @@ setup(
     package_dir={'objmpp_classification': 'objmpp_classification'},
     entry_points={
         'console_scripts': [
-            'objmpp_classification=objmpp_classification.organoid_classification:organoid_classification',
+            'objmpp-classification=objmpp_classification.organoid_classification:organoid_classification',
         ],
     },
 
