@@ -4,8 +4,7 @@ pathlib
 matplotlib
 pandas
 imageio
-skimage
-decimal
-cv2
-PIL
+scikit-image
+opencv-python
+Pillow
 scipy
