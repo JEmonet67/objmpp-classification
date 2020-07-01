@@ -46,9 +46,9 @@ def organoid_classification(path_data, path_images, debug=False):
 					path_ellipse = path_folder + "/" + f
 			path_img = path_images + "/" + name_img
 
-			#Création des régions binarisées et érodées.
-			all_ell_erod = Erode_ellipses(path_local_map)
-			all_ell = Binaryze_ellipses(path_region)
+			# #Création des régions binarisées et érodées.
+			# all_ell_erod = Erode_ellipses(path_local_map)
+			# all_ell = Binaryze_ellipses(path_region)
 			
 			#Segmentation Watershed.
 			Path(path_local_map+"/Watershed").mkdir(parents=True, exist_ok=True)
