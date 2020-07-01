@@ -23,52 +23,48 @@ def organoid_classification(path_data, path_images, debug=False):
 
 	#Itérations sur chaque dossier/image.
 	for objmpp_folder in list_folder:
-		path_folder = path_data+"/"+objmpp_folder
-		list_localmap = [folder_lm for folder_lm in listdir(path_folder) if "local_map" in folder_lm]
-		for folder in list_localmap:
+		path_img_folder = path_data+"/"+objmpp_folder
+		list_ref = [splitext(ref_img)[0] for ref_img in listdir(path_img_folder) if "csv" == splitext(f)[1]]
+		for ref in list_ref:
 			#Récupération du nom et de l'id de l'image en cours.
-			id_image = regexp_id.search(folder).group(0)
-			name_img = folder.replace("local_map_","").replace(f"_{id_image}","")
+			id_image = regexp_id.search(ref).group(0)
+			name_img = ref.replace(f"-marks-{id_image}","")
 			name_img = re.sub(regexp_name,r'\1.\2',name_img)
 
 			#Récupération des chemins requis pour la suite.
 			#Vérification des fichiers.
 			#Ajouter des blocs if/raise pour chaque élément afin de vérifier qu'ils existent et sinon envoyer une erreur explicite.
-			files_id = [f for f in listdir(path_folder) if id_image in f]
+			files_id = [f for f in listdir(path_img_folder) if id_image in f]
 			for f in files_id:
-				if "local_map" in f:
-					path_local_map = path_folder + "/" + f
-				elif "region" in f:
-					path_region = path_folder + "/" + f
+				if "region" in f:
+					path_region = path_img_folder + "/" + f
 				elif "marks" in f:
-					path_csv = path_folder + "/" + f
-				elif "ellipse" in f:
-					path_ellipse = path_folder + "/" + f
+					path_csv = path_img_folder + "/" + f
 			path_img = path_images + "/" + name_img
 
-			# #Création des régions binarisées et érodées.
-			# all_ell_erod = Erode_ellipses(path_local_map)
-			# all_ell = Binaryze_ellipses(path_region)
+			#Création des régions binarisées et érodées.
+			#all_ell_erod = Erode_ellipses(path_img_folder) ## A MODIFIER
+			all_ell = Binaryze_ellipses(path_region)
 			
 			#Segmentation Watershed.
-			Path(path_local_map+"/Watershed").mkdir(parents=True, exist_ok=True)
-			watershed = Seq_Water_meth2(path_img,all_ell,all_ell_erod,path_local_map+"/Watershed",10)
+			Path(path_img_folder+"/Watershed").mkdir(parents=True, exist_ok=True)
+			watershed = Seq_Water_meth2(path_img,all_ell,all_ell_erod,path_img_folder+"/Watershed",10)
 
 			#Séparation des objets watershed.
-			Path(path_local_map+"/local_map_watershed").mkdir(parents=True, exist_ok=True)
+			Path(path_img_folder+"/local_map_watershed").mkdir(parents=True, exist_ok=True)
 			list_regions_obj = Separate_ellipses(watershed,path_csv)
-			file_list_regions_obj = open(path_local_map+"/local_map_watershed/Liste_regions_objets.txt","wb")
+			file_list_regions_obj = open(path_img_folder+"/local_map_watershed/Liste_regions_objets.txt","wb")
 			pickle.Pickler(file_list_regions_obj).dump(list_regions_obj)
 			file_list_regions_obj.close()
 
 			#Transformation des objets en map des distance.
-			list_dm_obj = Distance_map(path_local_map+"/local_map_watershed",list_regions_obj)
-			file_list_dm_obj = open(path_local_map+"/local_map_watershed/Liste_dist_map_objets.txt","wb")
+			list_dm_obj = Distance_map(path_img_folder+"/local_map_watershed",list_regions_obj)
+			file_list_dm_obj = open(path_img_folder+"/local_map_watershed/Liste_dist_map_objets.txt","wb")
 			pickle.Pickler(file_list_dm_obj).dump(list_dm_obj)
 			file_list_dm_obj.close()
 			
 			#Classification des organoïdes.
-			intensity_profiling(list_dm_obj,path_local_map,path_csv,path_img,path_ellipse,20)
+			intensity_profiling(list_dm_obj,path_img_folder,path_csv,path_img,path_ellipse,20)
 			
 				
 		#depickler = pickle.Unpickler(file).load()
