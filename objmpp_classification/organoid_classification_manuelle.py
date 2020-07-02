@@ -50,21 +50,21 @@ def organoid_classification_manuelle(path_data, path_images, debug=False):
 			Path(path_img_folder+"/Watershed").mkdir(parents=True, exist_ok=True)
 			watershed = Seq_Water_meth2(path_img,all_ells,all_ells_erod,path_img_folder+"/Watershed",10)
 
-			# #Séparation des objets watershed.
-			# Path(path_img_folder+"/local_map_watershed").mkdir(parents=True, exist_ok=True)
-			# list_regions_obj = Separate_ellipses(watershed,path_csv)
-			# file_list_regions_obj = open(path_img_folder+"/local_map_watershed/Liste_regions_objets.txt","wb")
-			# pickle.Pickler(file_list_regions_obj).dump(list_regions_obj)
-			# file_list_regions_obj.close()
+			#Séparation des objets watershed.
+			Path(path_img_folder+"/local_map_watershed").mkdir(parents=True, exist_ok=True)
+			list_regions_obj = Separate_ellipses(watershed,path_csv)
+			file_list_regions_obj = open(path_img_folder+"/local_map_watershed/Liste_regions_objets.txt","wb")
+			pickle.Pickler(file_list_regions_obj).dump(list_regions_obj)
+			file_list_regions_obj.close()
 
-			# #Transformation des objets en map des distance.
-			# list_dm_obj = Distance_map(path_img_folder+"/local_map_watershed",list_regions_obj)
-			# file_list_dm_obj = open(path_img_folder+"/local_map_watershed/Liste_dist_map_objets.txt","wb")
-			# pickle.Pickler(file_list_dm_obj).dump(list_dm_obj)
-			# file_list_dm_obj.close()
+			#Transformation des objets en map des distance.
+			list_dm_obj = Distance_map(path_img_folder+"/local_map_watershed",list_regions_obj)
+			file_list_dm_obj = open(path_img_folder+"/local_map_watershed/Liste_dist_map_objets.txt","wb")
+			pickle.Pickler(file_list_dm_obj).dump(list_dm_obj)
+			file_list_dm_obj.close()
 			
-			# #Classification des organoïdes.
-			# intensity_profiling(list_dm_obj,path_img_folder,path_csv,path_img,path_ellipse,20)
+			#Classification des organoïdes.
+			intensity_profiling(list_dm_obj,path_img_folder,path_csv,path_img,path_ellipse,20)
 			
 				
 		#depickler = pickle.Unpickler(file).load()
