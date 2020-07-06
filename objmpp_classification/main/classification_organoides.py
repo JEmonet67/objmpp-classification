@@ -15,7 +15,7 @@ import cv2 as cv
 from PIL import Image
 import pickle
 
-def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_ells,k):
+def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     print("Début de l'algorithme.")
     
     #Création du répertoire parent de stockage des résultats.
@@ -34,9 +34,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
     img_global = np.array(Image.open(path_image))
     img_global_norm = cv.normalize(img_global, np.zeros(img_global.shape),0, 255, cv.NORM_MINMAX)
     img_global = np.uint8(img_global_norm)
-    ##img_glob_ells = np.array(Image.open(path_glob_ells))
-    #img_glob_ells_norm = cv.normalize(img_glob_ells, np.zeros(img_glob_ells.shape),0, 255, cv.NORM_MINMAX)
-    ##img_glob_ells = np.uint8(img_glob_ells_norm)
     
     #Création de la figure ellipse all.
     fig_all = plt.figure()
@@ -108,8 +105,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
         img_ell_locale = img_ellipse[coordonnees[2]:coordonnees[3],
                                      coordonnees[0]:coordonnees[1]]
         img_glob_locale = img_global[coordonnees[2]:coordonnees[3],
-                                     coordonnees[0]:coordonnees[1]]
-        ##img_glob_ells_locale = img_glob_ells[coordonnees[2]:coordonnees[3],
                                      coordonnees[0]:coordonnees[1]]
         
         

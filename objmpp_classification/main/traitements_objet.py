@@ -22,7 +22,7 @@ def Erode_ellipses(list_distmap,path_file):
         distmap_ell[distmap_ell != 0] = 1
         All_ell_erod += distmap_ell
     
-    io.imwrite(f"{path_file}/All_Ellipses_érodées.png",img_as_ubyte(somme))
+    io.imwrite(f"{path_file}/All_Ellipses_érodées.png",somme)
     return All_ell_erod
     
 
@@ -63,7 +63,7 @@ def Separate_ellipses(regions):
 
 
 #Code pour créer une map de distance à partir d'un objet.
-def Distance_map(path_file,list_obj):
+def Distance_map(list_obj,path_file=False):
     n_obj = 1
     list_dm_obj = []
     for obj in list_obj:

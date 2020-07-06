@@ -11,10 +11,7 @@ def organoid_classification(path_data, path_images, debug=False):
 	"""Run Organoid classification from obj.MPP output"""
 
 	#Initialisation.
-	# path_data = input("Entrez le chemin du dossier contenant les données à traiter : ")
-	# path_images = input("Entrez le chemin du dossier contenant les images d'origines : ")
-	# path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides"
-	# path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
+
 
 	list_folder = [f for f in listdir(path_data) if "" == splitext(f)[1]]
 
@@ -37,14 +34,14 @@ def organoid_classification(path_data, path_images, debug=False):
 			list_files_id = [files for files in listdir(path_img_folder) if id_image in files]
 			for files_id in list_files_id:
 				if "region" in files_id:
-					path_region = path_img_folder + "/" + f
+					path_region = path_img_folder + "/" + files_id
 				elif "marks" in files_id:
-					path_csv = path_img_folder + "/" + f
+					path_csv = path_img_folder + "/" + files_id
 			path_img = path_images + "/" + name_img
 
 			#Création des régions binarisées et érodées.
 			all_ell_sep = Separate_ellipses(path_region)
-			list_ells_mapdist = Distance_map(False,all_ell_sep)
+			list_ells_mapdist = Distance_map(all_ell_sep)
 			all_ell_erod = Erode_ellipses(list_ells_mapdist,path_img_folder)
 			all_ell = Binaryze_ellipses(path_region)
 			
@@ -60,13 +57,13 @@ def organoid_classification(path_data, path_images, debug=False):
 			file_list_regions_obj.close()
 
 			#Transformation des objets en map des distance.
-			list_dm_obj = Distance_map(path_img_folder+"/local_map_watershed",list_regions_obj)
+			list_dm_obj = Distance_map(list_regions_obj, path_img_folder+"/local_map_watershed")
 			file_list_dm_obj = open(path_img_folder+"/local_map_watershed/Liste_dist_map_objets.txt","wb")
 			pickle.Pickler(file_list_dm_obj).dump(list_dm_obj)
 			file_list_dm_obj.close()
 			
 			#Classification des organoïdes.
-			intensity_profiling(list_dm_obj,path_img_folder,path_csv,path_img,path_ellipse,20)
+			intensity_profiling(list_dm_obj,path_img_folder,path_csv,path_img,20)
 			
 				
 		#depickler = pickle.Unpickler(file).load()
@@ -77,7 +74,8 @@ def organoid_classification(path_data, path_images, debug=False):
 			
 			
 	    
-	    
-
+path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides"
+path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
+organoid_classification(path_data,path_images)
 
 	    
