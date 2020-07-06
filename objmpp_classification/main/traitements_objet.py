@@ -13,16 +13,24 @@ import cv2 as cv
 import pickle
 
 #Code pour binariser, éroder et fusionner les map des distances des objets.
-def Erode_ellipses(list_distmap,path_file):
+def Erode_ellipses(list_distmap,path_file=False):
     dim = list_distmap[0].shape
     All_ell_erod = np.zeros([dim[0],dim[1]])
     
     for distmap_ell in list_distmap:
-        distmap_ell[distmap_ell > 0.3] = 0
-        distmap_ell[distmap_ell != 0] = 1
-        All_ell_erod += distmap_ell
+        distmap_ell_norm = cv.normalize(distmap_ell, np.zeros(distmap_ell.shape),0,1,cv.NORM_MINMAX)
+        # print("distmap ell norm",distmap_ell_norm)
+        # print("distmap ell norm dtype",distmap_ell_norm.dtype)
+        # print("distmap ell norm values",np.unique(distmap_ell_norm))
+
+        distmap_ell_norm[distmap_ell_norm < 0.7] = 0
+        distmap_ell_norm[distmap_ell_norm != 0] = 1
+        All_ell_erod += distmap_ell_norm
     
-    io.imwrite(f"{path_file}/All_Ellipses_érodées.png",somme)
+    if path_file != False:
+        All_ell_erod_norm = cv.normalize(All_ell_erod, np.zeros(All_ell_erod.shape),0, 255, cv.NORM_MINMAX)
+        io.imwrite(f"{path_file}/All_Ellipses_érodées.png",np.uint8(All_ell_erod_norm))
+        
     return All_ell_erod
     
 
@@ -38,9 +46,8 @@ def Binaryze_ellipses(path_regions):
 
 
 #Code pour séparer chaque ellipses à partir d'une image des régions.
-def Separate_ellipses(regions):
+def Separate_ellipses(img_all_regions):
     list_region_sep = []
-    img_all_regions = cv.imread(regions,0)
     list_objects = [objets for objets in np.unique(img_all_regions) if objets!=0]
     for value_obj in list_objects:
         img_region = np.copy(img_all_regions)
@@ -52,8 +59,30 @@ def Separate_ellipses(regions):
         # np.save(f"{path_output}/Ellipse_{n_ell}.npy", img_region)
     
     return list_region_sep
+  
+def Separate_ells_watershed(regions, path_csv,path_output=False):
+    df_marks = pd.read_csv(path_csv)
+    list_center_y = df_marks["Center Col"]
+    list_center_x = df_marks["Center Row"]    
+    list_region_obj = []
     
-
+    for n_ell in range(1,len(list_center_x)+1):
+        img = np.copy(regions)
+        center_y = list_center_y[n_ell-1]
+        center_x = list_center_x[n_ell-1]
+        
+        value_center = img[(center_x,center_y)]
+        
+        img[img != value_center] = 0
+        img[img == value_center] = 255
+        
+        list_region_obj = list_region_obj + [img]
+        
+        if path_output!=False:
+            io.imwrite(f"{path_output}/Ellipse_{n_ell}.png", img)
+            np.save(f"{path_output}/Ellipse_{n_ell}.npy", img)
+    
+    return list_region_obj
 
 # path_output_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/Test_Results/Img_marker_watershed_segmentation"
 # path_csv_t = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO/UBTD1-03_w24-DAPI_TIF-marks-2020y06m09d14h48m55s317l.csv"
@@ -75,6 +104,7 @@ def Distance_map(list_obj,path_file=False):
         list_dm_obj = list_dm_obj + [dm_obj_int8]
         if path_file != False:
             io.imwrite(f"{path_file}/local_map_watersh_{n_obj}.png",dm_obj_int8)
+            np.save(f"{path_file}/local_map_watersh_{n_obj}.npy",dm_obj_int8)
         n_obj += 1
     return list_dm_obj
 

@@ -15,9 +15,7 @@ import cv2 as cv
 from PIL import Image
 import pickle
 
-def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
-    print("Début de l'algorithme.")
-    
+def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):    
     #Création du répertoire parent de stockage des résultats.
     output_path_analyze = f"{path_output}/Local_Map_Analyze"
     Path(output_path_analyze).mkdir(parents=True, exist_ok=True)
@@ -66,6 +64,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         print("Ellipse numéro", n_img, "en cours de traitement.")
         img_ellipse = list_dm_obj[n_img-1]
         max_img = np.max(img_ellipse)
+        print("image values",np.unique(img_ellipse))
         
         #Création de la liste des niveaux.
         list_Niveau = [0]
@@ -124,7 +123,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
                             list_somme[i_discretisation] += img_glob_locale[i,j]
                             Found = True
                         i_discretisation += 1
-        
         
         #Calcul de la liste des moyennes de l'ellipse en cours.
         i_mean = 0
