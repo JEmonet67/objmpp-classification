@@ -11,8 +11,6 @@ def organoid_classification(path_data, path_images, debug=False):
 	"""Run Organoid classification from obj.MPP output"""
 
 	#Initialisation.
-
-
 	list_folder = [f for f in listdir(path_data) if "" == splitext(f)[1]]
 
 	regexp_id = re.compile(r'[0-9]{4}y([0-9]{2}[mdhs]){5}[0-9]{3}l')
@@ -74,8 +72,8 @@ def organoid_classification(path_data, path_images, debug=False):
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides"
-path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
-organoid_classification(path_data,path_images)
+# path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides"
+# path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
+# organoid_classification(path_data,path_images)
 
 	    
