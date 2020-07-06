@@ -43,7 +43,9 @@ def organoid_classification(path_data, path_images, debug=False):
 			path_img = path_images + "/" + name_img
 
 			#Création des régions binarisées et érodées.
-			#all_ell_erod = Erode_ellipses(path_img_folder) ## A MODIFIER
+			all_ell_sep = Separate_ellipses(path_region)
+			list_ells_mapdist = Distance_map(False,all_ell_sep)
+			all_ell_erod = Erode_ellipses(list_ells_mapdist,path_img_folder)
 			all_ell = Binaryze_ellipses(path_region)
 			
 			#Segmentation Watershed.
@@ -52,7 +54,7 @@ def organoid_classification(path_data, path_images, debug=False):
 
 			#Séparation des objets watershed.
 			Path(path_img_folder+"/local_map_watershed").mkdir(parents=True, exist_ok=True)
-			list_regions_obj = Separate_ellipses(watershed,path_csv)
+			list_regions_obj = Separate_ellipses(watershed)
 			file_list_regions_obj = open(path_img_folder+"/local_map_watershed/Liste_regions_objets.txt","wb")
 			pickle.Pickler(file_list_regions_obj).dump(list_regions_obj)
 			file_list_regions_obj.close()

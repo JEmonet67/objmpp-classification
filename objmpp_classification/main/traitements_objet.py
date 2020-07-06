@@ -13,18 +13,16 @@ import cv2 as cv
 import pickle
 
 #Code pour binariser, éroder et fusionner les map des distances des objets.
-def Erode_ellipses(path_file):
-    list_img = [f for f in listdir(path_file) if ".npy" == splitext(f)[1]]
-    dim = np.load(f"{path_file}/{list_img[0]}").shape
+def Erode_ellipses(list_distmap,path_file):
+    dim = list_distmap[0].shape
     All_ell_erod = np.zeros([dim[0],dim[1]])
     
-    for fichier in list_img:
-        img_ellipse = np.load(f"{path_file}/{fichier}")
-        img_ellipse[img_ellipse > 0.3] = 0
-        img_ellipse[img_ellipse != 0] = 1
-        All_ell_erod += img_ellipse
+    for distmap_ell in list_distmap:
+        distmap_ell[distmap_ell > 0.3] = 0
+        distmap_ell[distmap_ell != 0] = 1
+        All_ell_erod += distmap_ell
     
-    #io.imwrite(f"{path_file}/All_Ellipses_érodées.png",img_as_ubyte(somme))
+    io.imwrite(f"{path_file}/All_Ellipses_érodées.png",img_as_ubyte(somme))
     return All_ell_erod
     
 
@@ -40,27 +38,20 @@ def Binaryze_ellipses(path_regions):
 
 
 #Code pour séparer chaque ellipses à partir d'une image des régions.
-def Separate_ellipses(regions, path_csv):
-    df_marks = pd.read_csv(path_csv)
-    list_center_y = df_marks["Center Col"]
-    list_center_x = df_marks["Center Row"]
-    list_region_obj = []
+def Separate_ellipses(regions):
+    list_region_sep = []
+    img_all_regions = cv.imread(regions,0)
+    list_objects = [objets for objets in np.unique(img_all_regions) if objets!=0]
+    for value_obj in list_objects:
+        img_region = np.copy(img_all_regions)
+        img_region[img_region != value_obj] = 0
+        img_region[img_region == value_obj] = 255
+        
+        list_region_sep = list_region_sep + [img_region]
+        # io.imwrite(f"{path_output}/Ellipse_{n_ell}.png", img_region)
+        # np.save(f"{path_output}/Ellipse_{n_ell}.npy", img_region)
     
-    for n_ell in range(1,len(list_center_x)+1):
-        img = np.copy(regions)
-        center_y = list_center_y[n_ell-1]
-        center_x = list_center_x[n_ell-1]
-        
-        value_center = img[(center_x,center_y)]
-        
-        img[img != value_center] = 0
-        img[img == value_center] = 255
-        
-        list_region_obj = list_region_obj + [img]
-        # io.imwrite(f"{path_output}/Ellipse_{n_ell}.png", img)
-        # np.save(f"{path_output}/Ellipse_{n_ell}.npy", img)
-    
-    return list_region_obj
+    return list_region_sep
     
 
 
@@ -82,7 +73,8 @@ def Distance_map(path_file,list_obj):
         dm_obj_norm = cv.normalize(dm_obj, np.zeros(dm_obj.shape),0, 255, cv.NORM_MINMAX)
         dm_obj_int8 = np.uint8(dm_obj_norm)
         list_dm_obj = list_dm_obj + [dm_obj_int8]
-        io.imwrite(f"{path_file}/local_map_watersh_{n_obj}.png",dm_obj_int8)
+        if path_file != False:
+            io.imwrite(f"{path_file}/local_map_watersh_{n_obj}.png",dm_obj_int8)
         n_obj += 1
     return list_dm_obj
 
