@@ -19,10 +19,6 @@ def Erode_ellipses(list_distmap,path_file=False):
     
     for distmap_ell in list_distmap:
         distmap_ell_norm = cv.normalize(distmap_ell, np.zeros(distmap_ell.shape),0,1,cv.NORM_MINMAX)
-        # print("distmap ell norm",distmap_ell_norm)
-        # print("distmap ell norm dtype",distmap_ell_norm.dtype)
-        # print("distmap ell norm values",np.unique(distmap_ell_norm))
-
         distmap_ell_norm[distmap_ell_norm < 0.7] = 0
         distmap_ell_norm[distmap_ell_norm != 0] = 1
         All_ell_erod += distmap_ell_norm
@@ -44,6 +40,18 @@ def Binaryze_ellipses(path_regions):
     #io.imwrite(f"{path_output}/All_Ellipses.png",img_as_ubyte(img))
     return All_ell
 
+def Dilate_ellipses(list_ells_sep):
+    dim = list_ells_sep[0].shape
+    all_ells_dilated = np.zeros([dim[0],dim[1]])
+    kernel = np.ones((5,5), np.uint8) 
+    
+    for ells in list_ells_sep:
+        all_ells_dilated = all_ells_dilated + cv.dilate(ells,kernel, iterations=4)
+    
+    all_ells_dilated[all_ells_dilated!=0] = 255
+    all_ells_dilated = cv.normalize(all_ells_dilated, np.zeros(all_ells_dilated.shape),0, 1, cv.NORM_MINMAX)
+    all_ells_dilated = np.float32(all_ells_dilated)
+    return all_ells_dilated 
 
 #Code pour séparer chaque ellipses à partir d'une image des régions.
 def Separate_ellipses(img_all_regions):

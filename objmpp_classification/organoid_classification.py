@@ -7,7 +7,7 @@ import pickle
 import re
 
 
-def organoid_classification(path_data, path_images, debug=False):
+def organoid_classification(path_data, path_images, dilation=False, debug=False):
 	"""Run Organoid classification from obj.MPP output"""
 	print("Début du programme")
 	#Initialisation.
@@ -44,9 +44,12 @@ def organoid_classification(path_data, path_images, debug=False):
 			#Création des régions binarisées et érodées.
 			img_all_regions = cv.imread(path_region,0)
 			all_ell_sep = Separate_ellipses(img_all_regions)
-			list_ells_mapdist = Distance_map(all_ell_sep,path_img_folder)
+			list_ells_mapdist = Distance_map(all_ell_sep)
 			all_ell_erod = Erode_ellipses(list_ells_mapdist,path_img_folder)
-			all_ell = Binaryze_ellipses(path_region)
+			if dilation != False:
+				all_ell = Dilate_ellipses(all_ell_sep)
+			else:
+				all_ell = Binaryze_ellipses(path_region)
 			
 			print("Watershed en cours...")
 			#Segmentation Watershed.
@@ -81,8 +84,8 @@ def organoid_classification(path_data, path_images, debug=False):
 			
 			
 	    
-# path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides-KO"
-# path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
-# organoid_classification(path_data,path_images)
+path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides-GFP_dilated"
+path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
+organoid_classification(path_data,path_images,dilation=True)
 
 	    
