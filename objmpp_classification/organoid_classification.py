@@ -1,11 +1,8 @@
 """Written by Jérôme Emonet"""
 
-# from objmpp_classification.main.seg_orga_watershed import *
-# from objmpp_classification.main.classification_organoides import *
-# from objmpp_classification.main.traitements_objet import *
-from main.seg_orga_watershed import *
-from main.classification_organoides import *
-from main.traitements_objet import *
+from objmpp_classification.main.seg_orga_watershed import *
+from objmpp_classification.main.classification_organoides import *
+from objmpp_classification.main.traitements_objet import *
 import pickle
 import re
 
@@ -84,8 +81,8 @@ def organoid_classification(path_data, path_images, debug=False):
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides"
-path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
-organoid_classification(path_data,path_images)
+# path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides-KO"
+# path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
+# organoid_classification(path_data,path_images)
 
 	    

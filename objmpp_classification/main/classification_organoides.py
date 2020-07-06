@@ -64,7 +64,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         print("Ellipse numéro", n_img, "en cours de traitement.")
         img_ellipse = list_dm_obj[n_img-1]
         max_img = np.max(img_ellipse)
-        print("image values",np.unique(img_ellipse))
         
         #Création de la liste des niveaux.
         list_Niveau = [0]
