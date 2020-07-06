@@ -34,9 +34,9 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
     img_global = np.array(Image.open(path_image))
     img_global_norm = cv.normalize(img_global, np.zeros(img_global.shape),0, 255, cv.NORM_MINMAX)
     img_global = np.uint8(img_global_norm)
-    img_glob_ells = np.array(Image.open(path_glob_ells))
-    img_glob_ells_norm = cv.normalize(img_glob_ells, np.zeros(img_glob_ells.shape),0, 255, cv.NORM_MINMAX)
-    img_glob_ells = np.uint8(img_glob_ells_norm)
+    ##img_glob_ells = np.array(Image.open(path_glob_ells))
+    #img_glob_ells_norm = cv.normalize(img_glob_ells, np.zeros(img_glob_ells.shape),0, 255, cv.NORM_MINMAX)
+    ##img_glob_ells = np.uint8(img_glob_ells_norm)
     
     #Création de la figure ellipse all.
     fig_all = plt.figure()
@@ -63,13 +63,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
     (dechet["taille"],dechet["contour"],dechet["max_intensity"],dechet["max_indice"],
     dechet["mean_intensity"],dechet["rapp_taille_perim"],dechet["mean_creux"],dechet["seuil"]) = ([],[],[],[],
                                                                                                       [],[],[],[])
-    
-    # compact["taille"] = compact["contour"] = compact["max_intensity"] = compact["max_indice"] = []
-    # compact["mean_intensity"] = compact["rapp_taille_perim"] = compact["mean_creux"] = compact["seuil"] = []
-    # cystique["taille"] = cystique["contour"] = cystique["max_intensity"] = cystique["max_indice"] = []
-    # cystique["mean_intensity"] = cystique["rapp_taille_perim"] = cystique["mean_creux"] = cystique["seuil"] = []
-    # dechet["taille"] = dechet["contour"] = dechet["max_intensity"] = dechet["max_indice"] = []
-    # dechet["mean_intensity"] = dechet["rapp_taille_perim"] = dechet["mean_creux"] = dechet["seuil"] = []
 
     #Début des itérations sur les images.
     while n_img <= n:
@@ -116,7 +109,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
                                      coordonnees[0]:coordonnees[1]]
         img_glob_locale = img_global[coordonnees[2]:coordonnees[3],
                                      coordonnees[0]:coordonnees[1]]
-        img_glob_ells_locale = img_glob_ells[coordonnees[2]:coordonnees[3],
+        ##img_glob_ells_locale = img_glob_ells[coordonnees[2]:coordonnees[3],
                                      coordonnees[0]:coordonnees[1]]
         
         
@@ -239,10 +232,10 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,path_glob_el
         plt.plot(x, list_mean)
         #Sauvegarde des images locales de l'organoïde et de la carte des distance.
         
-        img_glob_ells_locale_norm = cv.normalize(img_glob_ells_locale, np.zeros(img_glob_ells_locale.shape),0, 255, cv.NORM_MINMAX)
+        img_glob_locale_norm = cv.normalize(img_glob_locale, np.zeros(img_glob_locale.shape),0, 255, cv.NORM_MINMAX)
         img_ell_locale_norm = cv.normalize(img_ell_locale, np.zeros(img_ell_locale.shape),0, 255, cv.NORM_MINMAX)
         io.imwrite(f"{path_output}/Local_Map_Analyze/{type_organoid}_Image_locale_{n_img}.png",(np.uint8(img_ell_locale_norm)))
-        io.imwrite(f"{path_output}/Local_Map_Analyze/{type_organoid}_Global_Image_locale_{n_img}.png",np.uint8(img_glob_ells_locale_norm))
+        io.imwrite(f"{path_output}/Local_Map_Analyze/{type_organoid}_Global_Image_locale_{n_img}.png",np.uint8(img_glob_locale_norm))
         
         
         #Ecriture des niveaux discrétisés de chaque ellipse dans le fichier d'info.

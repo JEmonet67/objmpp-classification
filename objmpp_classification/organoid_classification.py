@@ -24,7 +24,7 @@ def organoid_classification(path_data, path_images, debug=False):
 	#Itérations sur chaque dossier/image.
 	for objmpp_folder in list_folder:
 		path_img_folder = path_data+"/"+objmpp_folder
-		list_ref = [splitext(ref_img)[0] for ref_img in listdir(path_img_folder) if "csv" == splitext(f)[1]]
+		list_ref = [splitext(ref_img)[0] for ref_img in listdir(path_img_folder) if "csv" == splitext(ref_img)[1]]
 		for ref in list_ref:
 			#Récupération du nom et de l'id de l'image en cours.
 			id_image = regexp_id.search(ref).group(0)
@@ -34,11 +34,11 @@ def organoid_classification(path_data, path_images, debug=False):
 			#Récupération des chemins requis pour la suite.
 			#Vérification des fichiers.
 			#Ajouter des blocs if/raise pour chaque élément afin de vérifier qu'ils existent et sinon envoyer une erreur explicite.
-			files_id = [f for f in listdir(path_img_folder) if id_image in f]
-			for f in files_id:
-				if "region" in f:
+			list_files_id = [files for files in listdir(path_img_folder) if id_image in files]
+			for files_id in list_files_id:
+				if "region" in files_id:
 					path_region = path_img_folder + "/" + f
-				elif "marks" in f:
+				elif "marks" in files_id:
 					path_csv = path_img_folder + "/" + f
 			path_img = path_images + "/" + name_img
 
