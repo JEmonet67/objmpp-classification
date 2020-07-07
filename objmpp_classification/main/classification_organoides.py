@@ -160,7 +160,10 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         mean_0_80 = np.mean(list_mean_0_80)
         
         #Classification des organoïdes par leur paramètres.
-        if mean_intensity > 90:
+        if mean_intensity >= 80 and contour >= 950:
+            type_organoid = "Compact"
+            n_compact += 1
+        elif mean_intensity >=100:
             type_organoid = "Compact"
             n_compact += 1
         elif max_indice >= 0.9 and contour >=  1100 and seuil >= 0.55 and mean_0_80 < 61:
