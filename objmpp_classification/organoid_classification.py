@@ -84,7 +84,7 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO_dilated"
+path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides_manualmask-GFP"
 path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
 organoid_classification(path_data,path_images,dilation=True)
 
