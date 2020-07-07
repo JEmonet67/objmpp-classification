@@ -163,7 +163,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         if mean_intensity > 90:
             type_organoid = "Compact"
             n_compact += 1
-        elif max_indice >= 0.8 and contour >=  1100 and seuil >= 0.55 and mean_0_80 < 65:
+        elif max_indice >= 0.9 and contour >=  1100 and seuil >= 0.55 and mean_0_80 < 61:
             type_organoid = "Cystique"
             n_cystique += 1
         else:
