@@ -45,7 +45,7 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 			img_all_regions = cv.imread(path_region,0)
 			all_ell_sep = Separate_ellipses(img_all_regions)
 			list_ells_mapdist = Distance_map(all_ell_sep)
-			all_ell_erod = Erode_ellipses(list_ells_mapdist,path_img_folder)
+			all_ell_erod = Erode_ellipses(list_ells_mapdist)
 			if dilation != False:
 				all_ell = Dilate_ellipses(all_ell_sep)
 			else:
@@ -84,7 +84,7 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides-GFP_dilated"
+path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/Images_KO_dilated"
 path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
 organoid_classification(path_data,path_images,dilation=True)
 
