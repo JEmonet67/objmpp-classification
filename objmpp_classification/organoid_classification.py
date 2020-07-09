@@ -18,10 +18,12 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 	all_compact = {}
 	all_cystique = {}
 	all_dechet = {}
+	n_file = 1
  
 	#Itérations sur chaque dossier/image.
 	for objmpp_folder in list_folder:
-		print("Fichier image en cours :",objmpp_folder)
+		print("Progression : ",n_file,"/",len(list_folder), " ", len(list_folder)-n_file, "fichiers restants")
+		print("Image en cours :",objmpp_folder)
 		path_img_folder = path_data+"/"+objmpp_folder
 		list_ref = [splitext(ref_img)[0] for ref_img in listdir(path_img_folder) if ".csv" == splitext(ref_img)[1]]
 		for ref in list_ref:
@@ -110,7 +112,7 @@ def add_dico(dico1, dico2):
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides_manualmask/GFP"
+path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides_manualmask/UBTD1"
 path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
 organoid_classification(path_data,path_images,dilation=True)
 

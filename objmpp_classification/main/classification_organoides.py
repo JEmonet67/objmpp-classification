@@ -159,7 +159,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         
         
         #Classification des organoïdes par leur paramètres.
-        if max_indice >= 0.9 and seuil >= 0.55 and rapp_max_creux>=1.5:
+        if max_indice >= 0.85 and seuil >= 0.55 and rapp_max_creux>=1.5:
             type_organoid = "Cystique"
             n_cystique += 1
         # elif mean_intensity >= 80 and contour >= 950:
@@ -298,21 +298,28 @@ def statistiques(compact, cystique, dechet):
         
 
 def excel_writing(dict_mean,dict_std, number, compact, cystique, dechet, path_output):    
-    list_result = [number, [],[], dict_mean["taille"],dict_std["taille"], [compact["taille"],cystique["taille"], dechet["taille"]], 
+    list_result = [number, [],[],
+                    dict_mean["taille"],dict_std["taille"], [compact["taille"],cystique["taille"], dechet["taille"]], 
                     dict_mean["contour"],dict_std["contour"],[compact["contour"],cystique["contour"], dechet["contour"]],
-                    dict_mean["rapp_max_creux"],dict_std["rapp_max_creux"], [compact["rapp_max_creux"],cystique["rapp_max_creux"], dechet["rapp_max_creux"]],
                     dict_mean["max_intensity"],dict_std["max_intensity"], [compact["max_intensity"],cystique["max_intensity"], dechet["max_intensity"]],
                     dict_mean["max_indice"], dict_std["max_indice"], [compact["max_indice"],cystique["max_indice"], dechet["max_indice"]],
                     dict_mean["mean_intensity"],dict_std["mean_intensity"], [compact["mean_intensity"],cystique["mean_intensity"], dechet["mean_intensity"]],
                     dict_mean["mean_creux"], dict_std["mean_creux"], [compact["mean_creux"],cystique["mean_creux"], dechet["mean_creux"]],
+                    dict_mean["rapp_max_creux"],dict_std["rapp_max_creux"],[compact["rapp_max_creux"],cystique["rapp_max_creux"], dechet["rapp_max_creux"]],
                     dict_mean["seuil"], dict_std["seuil"],[compact["seuil"],cystique["seuil"], dechet["seuil"]]]
 
 
     col = ["Compact","Cystique","Déchet"]
     
-    ind_niv1 = ["Nombre d'organoïdes","","","Taille","","","Périmètre","","",
-            "Rapport taille/perim²","","","Maximum du profil","","","Indice du maximum du profil",
-            "","","Moyenne du profil","","","Moyenne creux","","","Seuil","",""]
+    ind_niv1 = ["Nombre d'organoïdes","","",
+                "Taille","","",
+                "Périmètre","","",
+                "Maximum du profil","","",
+                "Indice du maximum du profil","","",
+                "Moyenne du profil","","",
+                "Moyenne creux","","",
+                "Rapport max/creux","","",
+                "Seuil","",""]
     ind_niv2 = ["Nombre","", "", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type", 
                  "Liste", "Moyenne", "Ecart-type", "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type",
                  "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type", "Liste"]

@@ -133,10 +133,10 @@ def Seq_Water_meth2(path_image,path_ells,path_ells_érodées,path_output,it):
     return labels
 
 
-path_image_t = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video/GFP-02_w24-DAPI.TIF"
-ells = plt.imread("/home/jerome/Bureau/Test_watersh/Img2_WT_Segm.png")
-ells_érodées = plt.imread("/home/jerome/Bureau/Test_watersh/Img2_WT_Segm_Erod.png")
-path_output_t = "/home/jerome/Bureau/Test_watersh"
+# path_image_t = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video/GFP-02_w24-DAPI.TIF"
+# ells = plt.imread("/home/jerome/Bureau/Test_watersh/Img2_WT_Segm.png")
+# ells_érodées = plt.imread("/home/jerome/Bureau/Test_watersh/Img2_WT_Segm_Erod.png")
+# path_output_t = "/home/jerome/Bureau/Test_watersh"
 
 #Seg_Water_meth1(path_image_t,path_ells_t,path_ells_érodées_t,path_output_t,10)
 #Seq_Water_meth2(path_image_t,ells,ells_érodées,path_output_t,10)
