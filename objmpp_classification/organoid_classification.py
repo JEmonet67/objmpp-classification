@@ -12,17 +12,19 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 	print("Début du programme")
 	#Initialisation.
 	list_folder = [f for f in listdir(path_data) if "" == splitext(f)[1]]
-
 	regexp_id = re.compile(r'[0-9]{4}y([0-9]{2}[mdhs]){5}[0-9]{3}l')
 	regexp_name = re.compile(r'(.*_.*)_(.*)')
+	all_number = [0,0,0]
+	all_compact = {}
+	all_cystique = {}
+	all_dechet = {}
  
 	#Itérations sur chaque dossier/image.
 	for objmpp_folder in list_folder:
-		print("Fichier en cours :",objmpp_folder)
+		print("Fichier image en cours :",objmpp_folder)
 		path_img_folder = path_data+"/"+objmpp_folder
 		list_ref = [splitext(ref_img)[0] for ref_img in listdir(path_img_folder) if ".csv" == splitext(ref_img)[1]]
 		for ref in list_ref:
-			print("Référence en cours :",ref)
 			print("Initialisation des chemins...")
 			#Récupération du nom et de l'id de l'image en cours.
 			id_image = regexp_id.search(ref).group(0)
@@ -73,18 +75,42 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 			
 			print("Début de l'algorithme de classification.")
 			#Classification des organoïdes.
-			intensity_profiling(list_dm_obj,path_img_folder,path_csv,path_img,20)
+			number,compact,cystique,dechet = intensity_profiling(list_dm_obj,path_img_folder,path_csv,path_img,20)
 			
-				
-		#depickler = pickle.Unpickler(file).load()
+			print("Ajout des statistiques des organoides à la liste totale.")
+			#Somme global de toutes les images.
+			all_number = add_list(number, all_number)
+			all_compact = add_dico(compact,all_compact)
+			all_cystique = add_dico(cystique,all_cystique)
+			all_dechet = add_dico(dechet,all_dechet)
 
-		#np_img = np.array(Image.open(path_img))
-		#Image.fromarray(watershed).save("/home/jerome/Bureau/Test/watershed.TIF")  
+	print("Mise en place de l'excel des statistiques global.")
+	#Calcul des statistiques globales.
+	dict_mean, dict_std = statistiques(all_compact,all_cystique,all_dechet)
 
+	#Mise en place du excel global.
+	excel_writing(dict_mean, dict_std, all_number, path_data)
+   
+def add_list(list1, list2):
+	i=0
+	for elt in list1:
+		list2[i] += elt
+		i += 1
+	
+	return list2
+    
+def add_dico(dico1, dico2):
+	for elt in dico1:
+		if elt not in dico2:
+			dico2[elt] = dico1[elt]
+		else:
+			dico2[elt] += dico1[elt]
+	
+	return dico2
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides_manualmask-GFP"
+path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides-GFP_dilated"
 path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
 organoid_classification(path_data,path_images,dilation=True)
 

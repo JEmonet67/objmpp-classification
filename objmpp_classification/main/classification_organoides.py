@@ -50,13 +50,13 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     cystique = {}
     dechet = {}
     (compact["taille"],compact["contour"],compact["max_intensity"],compact["max_indice"],
-    compact["mean_intensity"],compact["rapp_taille_perim"],compact["mean_creux"],compact["seuil"]) = ([],[],[],[],
+    compact["mean_intensity"],compact["rapp_max_creux"],compact["mean_creux"],compact["seuil"]) = ([],[],[],[],
                                                                                                       [],[],[],[])
     (cystique["taille"],cystique["contour"],cystique["max_intensity"],cystique["max_indice"],
-    cystique["mean_intensity"],cystique["rapp_taille_perim"],cystique["mean_creux"],cystique["seuil"]) = ([],[],[],[],
+    cystique["mean_intensity"],cystique["rapp_max_creux"],cystique["mean_creux"],cystique["seuil"]) = ([],[],[],[],
                                                                                                       [],[],[],[])
     (dechet["taille"],dechet["contour"],dechet["max_intensity"],dechet["max_indice"],
-    dechet["mean_intensity"],dechet["rapp_taille_perim"],dechet["mean_creux"],dechet["seuil"]) = ([],[],[],[],
+    dechet["mean_intensity"],dechet["rapp_max_creux"],dechet["mean_creux"],dechet["seuil"]) = ([],[],[],[],
                                                                                                       [],[],[],[])
 
     #Début des itérations sur les images.
@@ -144,29 +144,28 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         
         x = list(frange(Decimal(ratio),Decimal(1+ratio),ratio))
         
+        #Calcul du creux des ellipses.
+        borne50 = int(len(x) * 0.5)
+        list_mean_0_50 = list_mean[:borne50]
+        mean_0_50 = np.mean(list_mean_0_50)
+        
         #Calcul des paramètres de l'ellipse.
         taille = sum(list_count)
         contour = make_contour(img_ellipse)
-        rapp_taille_perim = taille/(contour**2)
         max_intensity = max(list_mean)
         max_indice = x[list_mean.index(max_intensity)]
         mean_intensity = np.mean(list_mean)
-
+        rapp_max_creux = max_intensity/mean_0_50
         
-        
-        #Calcul du creux des ellipses.
-        borne80 = int(len(x) * 0.8)
-        list_mean_0_80 = list_mean[:borne80]
-        mean_0_80 = np.mean(list_mean_0_80)
         
         #Classification des organoïdes par leur paramètres.
-        if max_indice >= 0.9 and contour >=  1100 and seuil >= 0.55 and mean_0_80 < 61:
+        if max_indice >= 0.9 and seuil >= 0.55 and rapp_max_creux>=1.5:
             type_organoid = "Cystique"
             n_cystique += 1
-        elif mean_intensity >= 80 and contour >= 950:
-            type_organoid = "Compact"
-            n_compact += 1
-        elif mean_intensity >=100:
+        # elif mean_intensity >= 80 and contour >= 950:
+        #     type_organoid = "Compact"
+        #     n_compact += 1
+        elif mean_intensity >=75:
             type_organoid = "Compact"
             n_compact += 1
         else:
@@ -178,29 +177,29 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         if type_organoid == "Compact":
             compact["taille"] += [taille]
             compact["contour"] += [contour]
-            compact["rapp_taille_perim"] += [rapp_taille_perim]
+            compact["rapp_max_creux"] += [rapp_max_creux]
             compact["max_intensity"] += [max_intensity]
             compact["max_indice"] += [max_indice]
             compact["mean_intensity"] += [mean_intensity]
-            compact["mean_creux"] += [mean_0_80]
+            compact["mean_creux"] += [mean_0_50]
             compact["seuil"] += [seuil]
         elif type_organoid == "Cystique":
             cystique["taille"] += [taille]
             cystique["contour"] += [contour]
-            cystique["rapp_taille_perim"] += [rapp_taille_perim]
+            cystique["rapp_max_creux"] += [rapp_max_creux]
             cystique["max_intensity"] += [max_intensity]
             cystique["max_indice"] += [max_indice]
             cystique["mean_intensity"] += [mean_intensity]
-            cystique["mean_creux"] += [mean_0_80]
+            cystique["mean_creux"] += [mean_0_50]
             cystique["seuil"] += [seuil]
         elif type_organoid == "Déchet":
             dechet["taille"] += [taille]
             dechet["contour"] += [contour]
-            dechet["rapp_taille_perim"] += [rapp_taille_perim]
+            dechet["rapp_max_creux"] += [rapp_max_creux]
             dechet["max_intensity"] += [max_intensity]
             dechet["max_indice"] += [max_indice]
             dechet["mean_intensity"] += [mean_intensity]
-            dechet["mean_creux"] += [mean_0_80]
+            dechet["mean_creux"] += [mean_0_50]
             dechet["seuil"] += [seuil]
 
         
@@ -256,11 +255,11 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         file_resultats.write(f"\t ---------   Ellipse numéro {n_img} {type_organoid} --------- \n \n"
                             + f""" Taille de l'ellipse (nb de pixels) : {taille} \n"""
                             + f""" Longueur du périmètre de l'ellipse : {contour} \n"""
-                            + f""" Rapport taille/périmètre² : {rapp_taille_perim} \n"""
                             + f""" Maximum du profil d'intensité de l'ellipse : {max_intensity} \n"""
                             + f""" Indice du maximum du profil d'intensité de l'ellipse : {max_indice} \n"""
                             + f""" Moyenne du profil d'intensité de l'ellipse : {round(mean_intensity,3)} \n"""
-                            + f""" Moyenne du creux de l'ellipse (0-80) : {round(mean_0_80,3)} \n \n"""
+                            + f""" Moyenne du creux de l'ellipse (0-50) : {round(mean_0_50,3)} \n"""
+                            + f""" Rapport max/creux : {rapp_max_creux} \n \n"""
                             + f""" Seuil = {round(seuil,3)} \t Différence au seuil = {round(diff_seuil,3)} \n \n""")
         
         
@@ -282,6 +281,8 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     number = [n_compact,n_cystique,n_dechet]
     excel_writing(dict_mean, dict_std, number, path_output)
     
+    return number,compact,cystique,dechet
+    
 
     
     
@@ -298,7 +299,7 @@ def statistiques(compact, cystique, dechet):
 
 def excel_writing(dict_mean,dict_std, number, path_output):    
     list_result = [number, [], dict_mean["taille"],dict_std["taille"],dict_mean["contour"],dict_std["contour"],
-                   dict_mean["rapp_taille_perim"],dict_std["rapp_taille_perim"], dict_mean["max_intensity"],
+                   dict_mean["rapp_max_creux"],dict_std["rapp_max_creux"], dict_mean["max_intensity"],
                    dict_std["max_intensity"], dict_mean["max_indice"], dict_std["max_indice"], dict_mean["mean_intensity"],
                    dict_std["mean_intensity"], dict_mean["mean_creux"], dict_std["mean_creux"], dict_mean["seuil"], 
                    dict_std["seuil"]]
@@ -316,7 +317,7 @@ def excel_writing(dict_mean,dict_std, number, path_output):
     ind = pd.MultiIndex.from_tuples(list_ind, names=["Paramètre","Statistique"])
     
     df_result = pd.DataFrame(list_result, columns = col, index = ind)
-    df_result.to_csv(f"{path_output}/Local_Map_Analyze/Stats_Paramètres_organoïdes.csv",index=True)
+    df_result.to_csv(f"{path_output}/Stats_Paramètres_organoïdes.csv",index=True)
 
 
 def make_contour(img):
