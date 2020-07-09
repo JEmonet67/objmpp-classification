@@ -279,7 +279,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     
     #Ecriture du fichier excel des statistiques de l'image. 
     number = [n_compact,n_cystique,n_dechet]
-    excel_writing(dict_mean, dict_std, number, path_output)
+    excel_writing(dict_mean, dict_std, number, compact, cystique, dechet, path_output)
     
     return number,compact,cystique,dechet
     
@@ -297,22 +297,25 @@ def statistiques(compact, cystique, dechet):
     return dict_mean, dict_std
         
 
-def excel_writing(dict_mean,dict_std, number, path_output):    
-    list_result = [number, [], dict_mean["taille"],dict_std["taille"],dict_mean["contour"],dict_std["contour"],
-                   dict_mean["rapp_max_creux"],dict_std["rapp_max_creux"], dict_mean["max_intensity"],
-                   dict_std["max_intensity"], dict_mean["max_indice"], dict_std["max_indice"], dict_mean["mean_intensity"],
-                   dict_std["mean_intensity"], dict_mean["mean_creux"], dict_std["mean_creux"], dict_mean["seuil"], 
-                   dict_std["seuil"]]
+def excel_writing(dict_mean,dict_std, number, compact, cystique, dechet, path_output):    
+    list_result = [number, [],[], dict_mean["taille"],dict_std["taille"], [compact["taille"],cystique["taille"], dechet["taille"]], 
+                    dict_mean["contour"],dict_std["contour"],[compact["contour"],cystique["contour"], dechet["contour"]],
+                    dict_mean["rapp_max_creux"],dict_std["rapp_max_creux"], [compact["rapp_max_creux"],cystique["rapp_max_creux"], dechet["rapp_max_creux"]],
+                    dict_mean["max_intensity"],dict_std["max_intensity"], [compact["max_intensity"],cystique["max_intensity"], dechet["max_intensity"]],
+                    dict_mean["max_indice"], dict_std["max_indice"], [compact["max_indice"],cystique["max_indice"], dechet["max_indice"]],
+                    dict_mean["mean_intensity"],dict_std["mean_intensity"], [compact["mean_intensity"],cystique["mean_intensity"], dechet["mean_intensity"]],
+                    dict_mean["mean_creux"], dict_std["mean_creux"], [compact["mean_creux"],cystique["mean_creux"], dechet["mean_creux"]],
+                    dict_mean["seuil"], dict_std["seuil"],[compact["seuil"],cystique["seuil"], dechet["seuil"]]]
 
 
     col = ["Compact","Cystique","Déchet"]
     
-    ind_niv1 = ["Nombre d'organoïdes","","Taille","","Périmètre","",
-            "Rapport taille/perim²","","Maximum du profil","","Indice du maximum du profil",
-            "","Moyenne du profil","","Moyenne creux","","Seuil",""]
-    ind_niv2 = ["Nombre","", "Moyenne", "Ecart-type", "Moyenne", "Ecart-type", "Moyenne", "Ecart-type", 
-                "Moyenne", "Ecart-type","Moyenne", "Ecart-type", "Moyenne", "Ecart-type",
-                "Moyenne", "Ecart-type", "Moyenne", "Ecart-type"]
+    ind_niv1 = ["Nombre d'organoïdes","","","Taille","","","Périmètre","","",
+            "Rapport taille/perim²","","","Maximum du profil","","","Indice du maximum du profil",
+            "","","Moyenne du profil","","","Moyenne creux","","","Seuil","",""]
+    ind_niv2 = ["Nombre","", "", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type", 
+                 "Liste", "Moyenne", "Ecart-type", "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type",
+                 "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type", "Liste"]
     list_ind = [(niv1,niv2) for niv1,niv2 in zip(ind_niv1,ind_niv2)]
     ind = pd.MultiIndex.from_tuples(list_ind, names=["Paramètre","Statistique"])
     
