@@ -14,15 +14,16 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 	list_folder = [f for f in listdir(path_data) if "" == splitext(f)[1]]
 	regexp_id = re.compile(r'[0-9]{4}y([0-9]{2}[mdhs]){5}[0-9]{3}l')
 	regexp_name = re.compile(r'(.*_.*)_(.*)')
-	all_number = [0,0,0]
+	all_number = [[],[],[]]
 	all_compact = {}
 	all_cystique = {}
 	all_dechet = {}
-	n_file = 1
+	n_file = 0
  
 	#Itérations sur chaque dossier/image.
 	for objmpp_folder in list_folder:
-		print("Progression : ",n_file,"/",len(list_folder), " ", len(list_folder)-n_file, "fichiers restants")
+		n_file += 1
+		print("Progression : ",n_file,"/",len(list_folder), " ", len(list_folder)-n_file+1, "fichiers restants")
 		print("Image en cours :",objmpp_folder)
 		path_img_folder = path_data+"/"+objmpp_folder
 		list_ref = [splitext(ref_img)[0] for ref_img in listdir(path_img_folder) if ".csv" == splitext(ref_img)[1]]
@@ -81,10 +82,11 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 			
 			print("Ajout des statistiques des organoides à la liste totale.")
 			#Somme global de toutes les images.
-			all_number = add_list(number, all_number)
+			all_number = add_list(all_number, number)
 			all_compact = add_dico(compact,all_compact)
 			all_cystique = add_dico(cystique,all_cystique)
 			all_dechet = add_dico(dechet,all_dechet)
+
 
 	print("Mise en place de l'excel des statistiques global.")
 	#Calcul des statistiques globales.
@@ -95,11 +97,11 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
    
 def add_list(list1, list2):
 	i=0
-	for elt in list1:
-		list2[i] += elt
+	for elt in list2:
+		list1[i] += elt
 		i += 1
 	
-	return list2
+	return list1
     
 def add_dico(dico1, dico2):
 	for elt in dico1:
@@ -112,7 +114,7 @@ def add_dico(dico1, dico2):
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides_manualmask/UBTD1"
+path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides_manualmask/GFP"
 path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
 organoid_classification(path_data,path_images,dilation=True)
 

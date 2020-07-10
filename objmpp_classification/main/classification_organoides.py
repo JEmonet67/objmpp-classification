@@ -43,8 +43,8 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     #Initialisation.
     n = len(list_center_x)
     n_img = 1
-    n_cystique = 0
     n_compact = 0
+    n_cystique = 0
     n_dechet = 0
     compact = {}
     cystique = {}
@@ -52,12 +52,15 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     (compact["taille"],compact["contour"],compact["max_intensity"],compact["max_indice"],
     compact["mean_intensity"],compact["rapp_max_creux"],compact["mean_creux"],compact["seuil"]) = ([],[],[],[],
                                                                                                       [],[],[],[])
+    compact["nombre"] = []
     (cystique["taille"],cystique["contour"],cystique["max_intensity"],cystique["max_indice"],
     cystique["mean_intensity"],cystique["rapp_max_creux"],cystique["mean_creux"],cystique["seuil"]) = ([],[],[],[],
                                                                                                       [],[],[],[])
+    cystique["nombre"] = []
     (dechet["taille"],dechet["contour"],dechet["max_intensity"],dechet["max_indice"],
     dechet["mean_intensity"],dechet["rapp_max_creux"],dechet["mean_creux"],dechet["seuil"]) = ([],[],[],[],
                                                                                                       [],[],[],[])
+    dechet["nombre"] = []
 
     #Début des itérations sur les images.
     while n_img <= n:
@@ -159,12 +162,9 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         
         
         #Classification des organoïdes par leur paramètres.
-        if max_indice >= 0.85 and seuil >= 0.55 and rapp_max_creux>=1.5:
+        if seuil >= 0.55 and rapp_max_creux>=1.45:
             type_organoid = "Cystique"
             n_cystique += 1
-        # elif mean_intensity >= 80 and contour >= 950:
-        #     type_organoid = "Compact"
-        #     n_compact += 1
         elif mean_intensity >=75:
             type_organoid = "Compact"
             n_compact += 1
@@ -202,7 +202,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
             dechet["mean_creux"] += [mean_0_50]
             dechet["seuil"] += [seuil]
 
-        
         #Création du graphique de l'ellipse en cours.
         #Bloc if permettant de pallier au fait que parfois une valeur très proche de 100 en trop
         #au lieu d'égal à 100 à cause de l'imprécision est ajoutée à  x.
@@ -266,6 +265,9 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         
         n_img += 1
     
+    compact["nombre"] = [n_compact]
+    cystique["nombre"] = [n_cystique]
+    dechet["nombre"] = [n_dechet]
     
     #Sauvegarde du graphique contenant les courbes de toutes les ellipses.
     fig_all.savefig(f"{output_path_analyze}/Graphic_ellipse_all.png")
@@ -278,7 +280,8 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     dict_mean, dict_std = statistiques(compact,cystique,dechet)
     
     #Ecriture du fichier excel des statistiques de l'image. 
-    number = [n_compact,n_cystique,n_dechet]
+    number = [compact["nombre"],cystique["nombre"],dechet["nombre"]]
+    print("NUMBER", number)
     excel_writing(dict_mean, dict_std, number, compact, cystique, dechet, path_output)
     
     return number,compact,cystique,dechet
@@ -297,8 +300,9 @@ def statistiques(compact, cystique, dechet):
     return dict_mean, dict_std
         
 
-def excel_writing(dict_mean,dict_std, number, compact, cystique, dechet, path_output):    
-    list_result = [number, [],[],
+def excel_writing(dict_mean,dict_std, list_number, compact, cystique, dechet, path_output):
+    somme_number = [np.sum(liste) for liste in list_number]
+    list_result = [somme_number, dict_mean["nombre"], dict_std["nombre"],[list_number[0], list_number[1], list_number[2]],
                     dict_mean["taille"],dict_std["taille"], [compact["taille"],cystique["taille"], dechet["taille"]], 
                     dict_mean["contour"],dict_std["contour"],[compact["contour"],cystique["contour"], dechet["contour"]],
                     dict_mean["max_intensity"],dict_std["max_intensity"], [compact["max_intensity"],cystique["max_intensity"], dechet["max_intensity"]],
@@ -308,10 +312,9 @@ def excel_writing(dict_mean,dict_std, number, compact, cystique, dechet, path_ou
                     dict_mean["rapp_max_creux"],dict_std["rapp_max_creux"],[compact["rapp_max_creux"],cystique["rapp_max_creux"], dechet["rapp_max_creux"]],
                     dict_mean["seuil"], dict_std["seuil"],[compact["seuil"],cystique["seuil"], dechet["seuil"]]]
 
-
     col = ["Compact","Cystique","Déchet"]
     
-    ind_niv1 = ["Nombre d'organoïdes","","",
+    ind_niv1 = ["Nombre d'organoïdes","","","",
                 "Taille","","",
                 "Périmètre","","",
                 "Maximum du profil","","",
@@ -320,7 +323,7 @@ def excel_writing(dict_mean,dict_std, number, compact, cystique, dechet, path_ou
                 "Moyenne creux","","",
                 "Rapport max/creux","","",
                 "Seuil","",""]
-    ind_niv2 = ["Nombre","", "", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type", 
+    ind_niv2 = ["Somme","Moyenne", "Ecart-type", "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type", 
                  "Liste", "Moyenne", "Ecart-type", "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type",
                  "Liste", "Moyenne", "Ecart-type",  "Liste", "Moyenne", "Ecart-type", "Liste"]
     list_ind = [(niv1,niv2) for niv1,niv2 in zip(ind_niv1,ind_niv2)]
