@@ -116,14 +116,9 @@ def Distance_map(list_obj,path_file=False):
         n_obj += 1
     return list_dm_obj
 
-# # check=False
-# path_file_1 = "/home/jerome/Bureau/Img"
-# fi1 = open('/home/jerome/Bureau/Test/local_map_UBTD1-01_w24-DAPI_TIF_2020y06m09d13h45m26s565l/local_map_watershed/Liste_regions_objets.txt','rb')
-# list_obj_1 = pickle.Unpickler(fi1).load()
-# liste, check = Distance_map(path_file_1,list_obj_1)
 
-# if check == True:
-#     path_file_2 = "/home/jerome/Bureau/Img"
-#     fi2 = open('/home/jerome/Bureau/Test/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/local_map_watershed/Liste_regions_objets.txt','rb')
-#     list_obj_2 = pickle.Unpickler(fi2).load()
-#     Distance_map(path_file_2,list_obj_2)
+
+# path_file_t = "/home/jerome/Bureau/Img"
+# fi = open('/home/jerome/Bureau/Test/local_map_UBTD1-03_w24-DAPI_TIF_2020y06m09d14h48m55s317l/local_map_watershed/Liste_regions_objets.txt','rb')
+# list_obj_t = pickle.Unpickler(fi2).load()
+# Distance_map(path_file_t,list_obj_t)

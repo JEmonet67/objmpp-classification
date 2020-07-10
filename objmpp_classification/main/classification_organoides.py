@@ -74,10 +74,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         while len(list_Niveau) <= k:
             Niveau = round(max_img/k*i_Niveau,5)
             list_Niveau += [Niveau]
-            # if Niveau < 1:
-            #     list_Niveau += [Niveau] + [Niveau + 1]
-            # else:
-            #     list_Niveau += [Niveau]
             i_Niveau+=1
 
         #Mise en place des coordonnées.
@@ -162,7 +158,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         
         
         #Classification des organoïdes par leur paramètres.
-        if seuil >= 0.55 and rapp_max_creux>=1.45:
+        if max_indice >= 0.85 and seuil >= 0.55 and rapp_max_creux>=1.45:
             type_organoid = "Cystique"
             n_cystique += 1
         elif mean_intensity >=75:
@@ -171,7 +167,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         else:
             type_organoid = "Déchet"
             n_dechet += 1
-        #list_organoid += [type_organoid]
         
         #Somme des paramètres de chaque organoïdes selon leur type.
         if type_organoid == "Compact":
@@ -281,7 +276,6 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     
     #Ecriture du fichier excel des statistiques de l'image. 
     number = [compact["nombre"],cystique["nombre"],dechet["nombre"]]
-    print("NUMBER", number)
     excel_writing(dict_mean, dict_std, number, compact, cystique, dechet, path_output)
     
     return number,compact,cystique,dechet
@@ -383,8 +377,7 @@ def frange(start, stop, step):
         start += Decimal(step)
 
 
-# #Attributions des 4 variables nécessaires à la fonction (test).
-# f = open('/home/jerome/Bureau/Test/local_map_UBTD1-08_w24-DAPI_TIF_2020y06m11d22h35m36s208l/local_map_watershed/Liste_dist_map_objets.txt',"rb")
+# #Attributions des variables nécessaires à la fonction (test).
 # list_dm_obj_t = pickle.Unpickler(f).load()
 # path_output_t = "/home/jerome/Bureau/Test/local_map_UBTD1-11_w24-DAPI_TIF_2020y06m12d18h07m31s730l"
 # path_csv_t = "/home/jerome/Bureau/Test/UBTD1-08_w24-DAPI_TIF-marks-2020y06m11d22h35m36s208l.csv"

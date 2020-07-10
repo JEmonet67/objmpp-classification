@@ -114,8 +114,8 @@ def add_dico(dico1, dico2):
 			
 			
 	    
-path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images-organoides_manualmask/GFP"
-path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
-organoid_classification(path_data,path_images,dilation=True)
+# path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images_WT123/WT"
+# path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
+# organoid_classification(path_data,path_images,dilation=True)
 
 	    
