@@ -1,0 +1,3 @@
+class MesuresObj:
+    pass
+

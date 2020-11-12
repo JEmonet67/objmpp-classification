@@ -1,13 +1,13 @@
 """Written by Jérôme Emonet"""
 
-from objmpp_classification.main.seg_orga_watershed import *
-from objmpp_classification.main.classification_organoides import *
-from objmpp_classification.main.traitements_objet import *
+from objmpp_classification.classif.seg_orga_watershed import *
+from objmpp_classification.classif.intensity_profile import *
+from objmpp_classification.classif.traitements_objet import *
 import pickle
 import re
 
 
-def organoid_classification(path_data, path_images, dilation=False, debug=False):
+def main(path_data, path_images, debug=False):
 	"""Run Organoid classification from obj.MPP output"""
 	print("Début du programme")
 	#Initialisation.
@@ -51,10 +51,7 @@ def organoid_classification(path_data, path_images, dilation=False, debug=False)
 			all_ell_sep = Separate_ellipses(img_all_regions)
 			list_ells_mapdist = Distance_map(all_ell_sep)
 			all_ell_erod = Erode_ellipses(list_ells_mapdist)
-			if dilation != False:
-				all_ell = Dilate_ellipses(all_ell_sep)
-			else:
-				all_ell = Binaryze_ellipses(path_region)
+			all_ell = Binaryze_ellipses(path_region)
 			
 			print("Watershed en cours...")
 			#Segmentation Watershed.
@@ -116,6 +113,6 @@ def add_dico(dico1, dico2):
 	    
 # path_data = "/home/jerome/Stage_Classif_Organoid/Result_MPP/Organoïd/images_WT123/WT"
 # path_images = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
-# organoid_classification(path_data,path_images,dilation=True)
+# organoid_classification(path_data,path_images)
 
 	    

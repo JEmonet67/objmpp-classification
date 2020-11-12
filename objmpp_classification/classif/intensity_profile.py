@@ -14,6 +14,16 @@ from decimal import Decimal
 import cv2 as cv
 from PIL import Image
 import pickle
+from objmpp_classification.objets.ImgObjMpp import ImgObjMpp
+
+def initialize_img(path_image, path_csv):
+    df_marks = pd.read_csv(path_csv)
+    list_center_x = df_marks["Center Col"]
+    list_center_y = df_marks["Center Row"]
+    list_maj_axis = df_marks["Semi Major Axis"]
+    img = ImgObjMpp(path_image,list_center_x,list_center_y,list_maj_axis)
+    
+    return img
 
 def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):    
     #Création du répertoire parent de stockage des résultats.
@@ -29,9 +39,9 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     #Ouverture des fichiers.
     file_info = open(f"{output_path_analyze}/Informations.txt","w")
     file_resultats = open(f"{output_path_analyze}/Resultats.txt","w")
-    img_global = np.array(Image.open(path_image))
-    img_global_norm = cv.normalize(img_global, np.zeros(img_global.shape),0, 255, cv.NORM_MINMAX)
-    img_global = np.uint8(img_global_norm)
+    img = np.array(Image.open(path_image))
+    img_global_norm = cv.normalize(img, np.zeros(img.shape),0, 255, cv.NORM_MINMAX)
+    img = np.uint8(img_global_norm)
     
     #Création de la figure ellipse all.
     fig_all = plt.figure()
@@ -65,8 +75,8 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
     #Début des itérations sur les images.
     while n_img <= n:
         print("Ellipse numéro", n_img, "en cours de traitement.")
-        img_ellipse = list_dm_obj[n_img-1]
-        max_img = np.max(img_ellipse)
+        distmap = list_dm_obj[n_img-1]
+        max_img = np.max(distmap)
         
         #Création de la liste des niveaux.
         list_Niveau = [0]
@@ -90,27 +100,27 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
             bord_gauche = 0
         if bord_haut < 0:
             bord_haut = 0
-        if bord_droit > img_ellipse.shape[0]-1:
-            bord_droit = img_ellipse.shape[0]-1
-        if bord_bas > img_ellipse.shape[1]-1:
-            bord_bas = img_ellipse.shape[1]-1
+        if bord_droit > distmap.shape[0]-1:
+            bord_droit = distmap.shape[0]-1
+        if bord_bas > distmap.shape[1]-1:
+            bord_bas = distmap.shape[1]-1
         
         coordonnees = [bord_gauche,bord_droit,bord_haut,bord_bas]
         
         
         #Création et sauvegarde des images locales de la carte des distances et de l'image d'origine.
-        img_ell_locale = img_ellipse[coordonnees[2]:coordonnees[3],
+        distmap_locale = distmap[coordonnees[2]:coordonnees[3],
                                      coordonnees[0]:coordonnees[1]]
-        img_glob_locale = img_global[coordonnees[2]:coordonnees[3],
+        img_locale = img[coordonnees[2]:coordonnees[3],
                                      coordonnees[0]:coordonnees[1]]
         
         
         #Début du parcours de l'ellipse en cours.
         list_somme = [0] * k
         list_count = [0] * k
-        for i in range(0,img_ell_locale.shape[0]):
-            for j in range(0,img_ell_locale.shape[1]):
-                value_distmap = round(img_ell_locale[i,j],5)
+        for i in range(0,distmap_locale.shape[0]):
+            for j in range(0,distmap_locale.shape[1]):
+                value_distmap = round(distmap_locale[i,j],5)
                 if value_distmap > 0:
                     i_discretisation = 0
                     Found = False
@@ -118,7 +128,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
                         if (value_distmap > list_Niveau[i_discretisation] 
                         and value_distmap <= list_Niveau[i_discretisation+1]):
                             list_count[i_discretisation] += 1
-                            list_somme[i_discretisation] += img_glob_locale[i,j]
+                            list_somme[i_discretisation] += img_locale[i,j]
                             Found = True
                         i_discretisation += 1
         
@@ -150,7 +160,7 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         
         #Calcul des paramètres de l'ellipse.
         taille = sum(list_count)
-        contour = make_contour(img_ellipse)
+        contour = make_contour(distmap)
         max_intensity = max(list_mean)
         max_indice = x[list_mean.index(max_intensity)]
         mean_intensity = np.mean(list_mean)
@@ -218,12 +228,12 @@ def intensity_profiling(list_dm_obj,path_output,path_csv,path_image,k):
         plt.close()
         #Ajout de la courbe de l'ellipse en cours dans le graphique contenant toutes les ellipses.
         plt.plot(x, list_mean)
-        #Sauvegarde des images locales de l'organoïde et de la carte des distance.
         
-        img_glob_locale_norm = cv.normalize(img_glob_locale, np.zeros(img_glob_locale.shape),0, 255, cv.NORM_MINMAX)
-        img_ell_locale_norm = cv.normalize(img_ell_locale, np.zeros(img_ell_locale.shape),0, 255, cv.NORM_MINMAX)
-        io.imwrite(f"{path_output}/Local_Map_Analyze/{type_organoid}_Image_locale_{n_img}.png",(np.uint8(img_ell_locale_norm)))
-        io.imwrite(f"{path_output}/Local_Map_Analyze/{type_organoid}_Global_Image_locale_{n_img}.png",np.uint8(img_glob_locale_norm))
+        #Sauvegarde des images locales de l'organoïde et de la carte des distance.
+        img_locale_norm = cv.normalize(img_locale, np.zeros(img_locale.shape),0, 255, cv.NORM_MINMAX)
+        distmap_locale_norm = cv.normalize(distmap_locale, np.zeros(distmap_locale.shape),0, 255, cv.NORM_MINMAX)
+        io.imwrite(f"{path_output}/Local_Map_Analyze/{type_organoid}_distancemap_{n_img}.png",(np.uint8(distmap_locale_norm)))
+        io.imwrite(f"{path_output}/Local_Map_Analyze/{type_organoid}_{n_img}.png",np.uint8(img_locale_norm))
         
         
         #Ecriture des niveaux discrétisés de chaque ellipse dans le fichier d'info.
@@ -380,10 +390,12 @@ def frange(start, stop, step):
 # #Attributions des variables nécessaires à la fonction (test).
 # list_dm_obj_t = pickle.Unpickler(f).load()
 # path_output_t = "/home/jerome/Bureau/Test/local_map_UBTD1-11_w24-DAPI_TIF_2020y06m12d18h07m31s730l"
-# path_csv_t = "/home/jerome/Bureau/Test/UBTD1-08_w24-DAPI_TIF-marks-2020y06m11d22h35m36s208l.csv"
-# path_image_t = "/home/jerome/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video/UBTD1-08_w24-DAPI.TIF"
+path_csv_t = "/mnt/Shared Data/Stage_Classif_Organoid/Code_stage/objmpp-classification/tests/objmpp-output/GFP-01/UBTD1-01_w24-DAPI_TIF-marks-2020y06m09d13h45m26s565l.csv"
+path_image_t = "/mnt/Shared Data/Stage_Classif_Organoid/Code_stage/objmpp-classification/tests/input/GFP-01/GFP-01_w24-DAPI.TIF"
 # path_glob_ells_t = "/home/jerome/Bureau/Test/UBTD1-08_w24-DAPI_TIF-ellipse-2020y06m11d22h35m36s208l.png"
 # k_t = 20
+
+initialize_img(path_image_t,path_csv_t)
 
 # #Lancement de la fonction (test).
 # intensity_profiling(list_dm_obj_t,path_output_t,path_csv_t,path_image_t,path_glob_ells_t,k_t)
