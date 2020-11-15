@@ -1,0 +1,444 @@
+	 ---------   Organoid numéro 1 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 25415 
+ Longueur du périmètre de l'ellipse : 1160 
+ Maximum du profil d'intensité de l'ellipse : 112.52 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9 
+ Moyenne du profil d'intensité de l'ellipse : 78.399 
+ Moyenne du creux de l'ellipse (0-50) : 63.508 
+ Rapport max/creux : 1.7717452919317247 
+ 
+ Seuil = 0.6 	 Différence au threshold = -11.6 
+ 
+	 ---------   Organoid numéro 2 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 9212 
+ Longueur du périmètre de l'ellipse : 698 
+ Maximum du profil d'intensité de l'ellipse : 104.2 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.7000000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 89.763 
+ Moyenne du creux de l'ellipse (0-50) : 82.583 
+ Rapport max/creux : 1.2617608950994756 
+ 
+ Seuil = 0.55 	 Différence au threshold = -47.84 
+ 
+	 ---------   Organoid numéro 3 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 11323 
+ Longueur du périmètre de l'ellipse : 810 
+ Maximum du profil d'intensité de l'ellipse : 140.05 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.05 
+ Moyenne du profil d'intensité de l'ellipse : 121.466 
+ Moyenne du creux de l'ellipse (0-50) : 133.268 
+ Rapport max/creux : 1.0508899360686739 
+ 
+ Seuil = 0.45 	 Différence au threshold = 17.72 
+ 
+	 ---------   Organoid numéro 4 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 11987 
+ Longueur du périmètre de l'ellipse : 1000 
+ Maximum du profil d'intensité de l'ellipse : 125.8 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.75 
+ Moyenne du profil d'intensité de l'ellipse : 111.984 
+ Moyenne du creux de l'ellipse (0-50) : 107.915 
+ Rapport max/creux : 1.1657322893017652 
+ 
+ Seuil = 0.5 	 Différence au threshold = 81.38 
+ 
+	 ---------   Organoid numéro 5 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 53639 
+ Longueur du périmètre de l'ellipse : 1803 
+ Maximum du profil d'intensité de l'ellipse : 129.25 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9 
+ Moyenne du profil d'intensité de l'ellipse : 87.586 
+ Moyenne du creux de l'ellipse (0-50) : 67.533 
+ Rapport max/creux : 1.9138791405683147 
+ 
+ Seuil = 0.6 	 Différence au threshold = 69.88 
+ 
+	 ---------   Organoid numéro 6 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 14591 
+ Longueur du périmètre de l'ellipse : 870 
+ Maximum du profil d'intensité de l'ellipse : 96.14 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.15000000000000002 
+ Moyenne du profil d'intensité de l'ellipse : 84.062 
+ Moyenne du creux de l'ellipse (0-50) : 87.973 
+ Rapport max/creux : 1.0928353017403067 
+ 
+ Seuil = 0.5 	 Différence au threshold = -78.23 
+ 
+	 ---------   Organoid numéro 7 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 38084 
+ Longueur du périmètre de l'ellipse : 1588 
+ Maximum du profil d'intensité de l'ellipse : 135.2 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.75 
+ Moyenne du profil d'intensité de l'ellipse : 125.041 
+ Moyenne du creux de l'ellipse (0-50) : 122.495 
+ Rapport max/creux : 1.1037185191232297 
+ 
+ Seuil = 0.5 	 Différence au threshold = 50.92 
+ 
+	 ---------   Organoid numéro 8 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 14931 
+ Longueur du périmètre de l'ellipse : 980 
+ Maximum du profil d'intensité de l'ellipse : 123.49 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.5 
+ Moyenne du profil d'intensité de l'ellipse : 116.447 
+ Moyenne du creux de l'ellipse (0-50) : 119.054 
+ Rapport max/creux : 1.0372604028424075 
+ 
+ Seuil = 0.5 	 Différence au threshold = -52.14 
+ 
+	 ---------   Organoid numéro 9 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 11976 
+ Longueur du périmètre de l'ellipse : 840 
+ Maximum du profil d'intensité de l'ellipse : 94.86 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.7000000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 80.174 
+ Moyenne du creux de l'ellipse (0-50) : 71.905 
+ Rapport max/creux : 1.3192406647660107 
+ 
+ Seuil = 0.55 	 Différence au threshold = -3.74 
+ 
+	 ---------   Organoid numéro 10 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 85846 
+ Longueur du périmètre de l'ellipse : 2025 
+ Maximum du profil d'intensité de l'ellipse : 82.06 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 42.776 
+ Moyenne du creux de l'ellipse (0-50) : 32.978 
+ Rapport max/creux : 2.4883255503669117 
+ 
+ Seuil = 0.65 	 Différence au threshold = -36.14 
+ 
+	 ---------   Organoid numéro 11 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 250529 
+ Longueur du périmètre de l'ellipse : 3880 
+ Maximum du profil d'intensité de l'ellipse : 109.52 
+ Indice du maximum du profil d'intensité de l'ellipse : 1.0 
+ Moyenne du profil d'intensité de l'ellipse : 62.758 
+ Moyenne du creux de l'ellipse (0-50) : 54.167 
+ Rapport max/creux : 2.021895249875385 
+ 
+ Seuil = 0.55 	 Différence au threshold = 55.86 
+ 
+	 ---------   Organoid numéro 12 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 35513 
+ Longueur du périmètre de l'ellipse : 1496 
+ Maximum du profil d'intensité de l'ellipse : 91.24 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 62.029 
+ Moyenne du creux de l'ellipse (0-50) : 49.923 
+ Rapport max/creux : 1.8276145263706105 
+ 
+ Seuil = 0.6 	 Différence au threshold = 6.89 
+ 
+	 ---------   Organoid numéro 13 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 15001 
+ Longueur du périmètre de l'ellipse : 1198 
+ Maximum du profil d'intensité de l'ellipse : 113.69 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.55 
+ Moyenne du profil d'intensité de l'ellipse : 105.326 
+ Moyenne du creux de l'ellipse (0-50) : 104.328 
+ Rapport max/creux : 1.0897362165478106 
+ 
+ Seuil = 0.5 	 Différence au threshold = 19.96 
+ 
+	 ---------   Organoid numéro 14 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 10393 
+ Longueur du périmètre de l'ellipse : 778 
+ Maximum du profil d'intensité de l'ellipse : 82.67 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.30000000000000004 
+ Moyenne du profil d'intensité de l'ellipse : 73.94 
+ Moyenne du creux de l'ellipse (0-50) : 78.063 
+ Rapport max/creux : 1.0590164354431675 
+ 
+ Seuil = 0.45 	 Différence au threshold = 71.04 
+ 
+	 ---------   Organoid numéro 15 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 14937 
+ Longueur du périmètre de l'ellipse : 939 
+ Maximum du profil d'intensité de l'ellipse : 77.14 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.75 
+ Moyenne du profil d'intensité de l'ellipse : 71.639 
+ Moyenne du creux de l'ellipse (0-50) : 71.176 
+ Rapport max/creux : 1.0837922895357985 
+ 
+ Seuil = 0.5 	 Différence au threshold = 9.26 
+ 
+	 ---------   Organoid numéro 16 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 35416 
+ Longueur du périmètre de l'ellipse : 1535 
+ Maximum du profil d'intensité de l'ellipse : 99.12 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9 
+ Moyenne du profil d'intensité de l'ellipse : 77.878 
+ Moyenne du creux de l'ellipse (0-50) : 69.907 
+ Rapport max/creux : 1.4178837598523752 
+ 
+ Seuil = 0.55 	 Différence au threshold = 13.73 
+ 
+	 ---------   Organoid numéro 17 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 14047 
+ Longueur du périmètre de l'ellipse : 962 
+ Maximum du profil d'intensité de l'ellipse : 95.13 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.65 
+ Moyenne du profil d'intensité de l'ellipse : 90.14 
+ Moyenne du creux de l'ellipse (0-50) : 90.596 
+ Rapport max/creux : 1.0500463596626781 
+ 
+ Seuil = 0.5 	 Différence au threshold = -9.12 
+ 
+	 ---------   Organoid numéro 18 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 17247 
+ Longueur du périmètre de l'ellipse : 1000 
+ Maximum du profil d'intensité de l'ellipse : 66.84 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.8 
+ Moyenne du profil d'intensité de l'ellipse : 54.74 
+ Moyenne du creux de l'ellipse (0-50) : 48.341 
+ Rapport max/creux : 1.3826772305082644 
+ 
+ Seuil = 0.55 	 Différence au threshold = 12.55 
+ 
+	 ---------   Organoid numéro 19 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 39879 
+ Longueur du périmètre de l'ellipse : 1511 
+ Maximum du profil d'intensité de l'ellipse : 75.46 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 49.759 
+ Moyenne du creux de l'ellipse (0-50) : 37.91 
+ Rapport max/creux : 1.9905038248483247 
+ 
+ Seuil = 0.6 	 Différence au threshold = 39.68 
+ 
+	 ---------   Organoid numéro 20 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 48017 
+ Longueur du périmètre de l'ellipse : 1964 
+ Maximum du profil d'intensité de l'ellipse : 107.9 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.8500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 91.852 
+ Moyenne du creux de l'ellipse (0-50) : 82.783 
+ Rapport max/creux : 1.3034077044803885 
+ 
+ Seuil = 0.55 	 Différence au threshold = 3.45 
+ 
+	 ---------   Organoid numéro 21 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 11113 
+ Longueur du périmètre de l'ellipse : 756 
+ Maximum du profil d'intensité de l'ellipse : 72.95 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.7000000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 64.757 
+ Moyenne du creux de l'ellipse (0-50) : 62.776 
+ Rapport max/creux : 1.1620683063591182 
+ 
+ Seuil = 0.5 	 Différence au threshold = 39.61 
+ 
+	 ---------   Organoid numéro 22 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 7909 
+ Longueur du périmètre de l'ellipse : 742 
+ Maximum du profil d'intensité de l'ellipse : 128.14 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.15000000000000002 
+ Moyenne du profil d'intensité de l'ellipse : 101.655 
+ Moyenne du creux de l'ellipse (0-50) : 117.198 
+ Rapport max/creux : 1.0933633679755626 
+ 
+ Seuil = 0.4 	 Différence au threshold = 105.36 
+ 
+	 ---------   Organoid numéro 23 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 9572 
+ Longueur du périmètre de l'ellipse : 778 
+ Maximum du profil d'intensité de l'ellipse : 63.11 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.8 
+ Moyenne du profil d'intensité de l'ellipse : 53.562 
+ Moyenne du creux de l'ellipse (0-50) : 48.297 
+ Rapport max/creux : 1.3067064206886556 
+ 
+ Seuil = 0.55 	 Différence au threshold = -7.21 
+ 
+	 ---------   Organoid numéro 24 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 66813 
+ Longueur du périmètre de l'ellipse : 2084 
+ Maximum du profil d'intensité de l'ellipse : 58.21 
+ Indice du maximum du profil d'intensité de l'ellipse : 1.0 
+ Moyenne du profil d'intensité de l'ellipse : 33.1 
+ Moyenne du creux de l'ellipse (0-50) : 27.359 
+ Rapport max/creux : 2.127636244014767 
+ 
+ Seuil = 0.6 	 Différence au threshold = -3.48 
+ 
+	 ---------   Organoid numéro 25 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 72537 
+ Longueur du périmètre de l'ellipse : 2326 
+ Maximum du profil d'intensité de l'ellipse : 68.27 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 37.28 
+ Moyenne du creux de l'ellipse (0-50) : 25.698 
+ Rapport max/creux : 2.6566269748618567 
+ 
+ Seuil = 0.65 	 Différence au threshold = 26.87 
+ 
+	 ---------   Organoid numéro 26 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 10904 
+ Longueur du périmètre de l'ellipse : 770 
+ Maximum du profil d'intensité de l'ellipse : 58.36 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.8 
+ Moyenne du profil d'intensité de l'ellipse : 54.013 
+ Moyenne du creux de l'ellipse (0-50) : 54.306 
+ Rapport max/creux : 1.0746510514491951 
+ 
+ Seuil = 0.5 	 Différence au threshold = -5.86 
+ 
+	 ---------   Organoid numéro 27 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 17947 
+ Longueur du périmètre de l'ellipse : 1138 
+ Maximum du profil d'intensité de l'ellipse : 114.76 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.8 
+ Moyenne du profil d'intensité de l'ellipse : 98.073 
+ Moyenne du creux de l'ellipse (0-50) : 89.619 
+ Rapport max/creux : 1.2805320300382732 
+ 
+ Seuil = 0.55 	 Différence au threshold = -31.34 
+ 
+	 ---------   Organoid numéro 28 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 43701 
+ Longueur du périmètre de l'ellipse : 1907 
+ Maximum du profil d'intensité de l'ellipse : 69.47 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 53.722 
+ Moyenne du creux de l'ellipse (0-50) : 51.747 
+ Rapport max/creux : 1.342493284634858 
+ 
+ Seuil = 0.5 	 Différence au threshold = 39.5 
+ 
+	 ---------   Organoid numéro 29 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 132954 
+ Longueur du périmètre de l'ellipse : 3054 
+ Maximum du profil d'intensité de l'ellipse : 83.64 
+ Indice du maximum du profil d'intensité de l'ellipse : 1.0 
+ Moyenne du profil d'intensité de l'ellipse : 42.874 
+ Moyenne du creux de l'ellipse (0-50) : 34.65 
+ Rapport max/creux : 2.4138528138528135 
+ 
+ Seuil = 0.6 	 Différence au threshold = 18.49 
+ 
+	 ---------   Organoid numéro 30 compact --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 27549 
+ Longueur du périmètre de l'ellipse : 1194 
+ Maximum du profil d'intensité de l'ellipse : 90.74 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 76.288 
+ Moyenne du creux de l'ellipse (0-50) : 68.838 
+ Rapport max/creux : 1.3181672913216538 
+ 
+ Seuil = 0.55 	 Différence au threshold = -5.75 
+ 
+	 ---------   Organoid numéro 31 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 49545 
+ Longueur du périmètre de l'ellipse : 1673 
+ Maximum du profil d'intensité de l'ellipse : 55.71 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 35.427 
+ Moyenne du creux de l'ellipse (0-50) : 27.867 
+ Rapport max/creux : 1.9991387662827003 
+ 
+ Seuil = 0.6 	 Différence au threshold = 22.01 
+ 
+	 ---------   Organoid numéro 32 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 13457 
+ Longueur du périmètre de l'ellipse : 850 
+ Maximum du profil d'intensité de l'ellipse : 47.51 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.8 
+ Moyenne du profil d'intensité de l'ellipse : 37.592 
+ Moyenne du creux de l'ellipse (0-50) : 32.253 
+ Rapport max/creux : 1.473041267478994 
+ 
+ Seuil = 0.55 	 Différence au threshold = 29.11 
+ 
+	 ---------   Organoid numéro 33 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 55501 
+ Longueur du périmètre de l'ellipse : 2052 
+ Maximum du profil d'intensité de l'ellipse : 46.28 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 26.344 
+ Moyenne du creux de l'ellipse (0-50) : 21.301 
+ Rapport max/creux : 2.172667949861509 
+ 
+ Seuil = 0.6 	 Différence au threshold = 14.89 
+ 
+	 ---------   Organoid numéro 34 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 39618 
+ Longueur du périmètre de l'ellipse : 1847 
+ Maximum du profil d'intensité de l'ellipse : 38.38 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 24.409 
+ Moyenne du creux de l'ellipse (0-50) : 20.542 
+ Rapport max/creux : 1.8683672475903028 
+ 
+ Seuil = 0.6 	 Différence au threshold = -4.78 
+ 
+	 ---------   Organoid numéro 35 waste --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 13779 
+ Longueur du périmètre de l'ellipse : 1208 
+ Maximum du profil d'intensité de l'ellipse : 80.09 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.30000000000000004 
+ Moyenne du profil d'intensité de l'ellipse : 74.278 
+ Moyenne du creux de l'ellipse (0-50) : 76.772 
+ Rapport max/creux : 1.0432188818840202 
+ 
+ Seuil = 0.5 	 Différence au threshold = -49.88 
+ 
+	 ---------   Organoid numéro 36 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 65183 
+ Longueur du périmètre de l'ellipse : 2217 
+ Maximum du profil d'intensité de l'ellipse : 55.97 
+ Indice du maximum du profil d'intensité de l'ellipse : 1.0 
+ Moyenne du profil d'intensité de l'ellipse : 32.259 
+ Moyenne du creux de l'ellipse (0-50) : 24.606 
+ Rapport max/creux : 2.27464845972527 
+ 
+ Seuil = 0.65 	 Différence au threshold = -27.34 
+ 
+	 ---------   Organoid numéro 37 cystic --------- 
+ 
+ Taille de l'ellipse (nb de pixels) : 45629 
+ Longueur du périmètre de l'ellipse : 1592 
+ Maximum du profil d'intensité de l'ellipse : 36.98 
+ Indice du maximum du profil d'intensité de l'ellipse : 0.9500000000000001 
+ Moyenne du profil d'intensité de l'ellipse : 22.36 
+ Moyenne du creux de l'ellipse (0-50) : 18.023 
+ Rapport max/creux : 2.0518226710314598 
+ 
+ Seuil = 0.6 	 Différence au threshold = 2.37 
+ 
