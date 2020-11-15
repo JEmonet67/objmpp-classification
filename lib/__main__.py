@@ -2,7 +2,7 @@ import click
 import logging
 import sys
 
-from objmpp_classification.main import main
+from lib.main import main
 
 @click.group()
 def cli():
