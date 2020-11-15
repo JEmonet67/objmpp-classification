@@ -1,30 +1,27 @@
 #!/home/jerome/anaconda3/bin/python3
 
 import numpy as np
-import math
 import imageio as io
 import matplotlib.pyplot as plt
-from skimage import img_as_ubyte
+from skimage.util import img_as_ubyte
 import cv2 as cv
 
 from scipy import ndimage as ndi
 from skimage.morphology import disk
 from skimage.segmentation import watershed
 from skimage.filters import rank
-from skimage.util import img_as_ubyte
 
 
 def Make_markers(path_image,path_ells,path_ells_érodées,path_output,it):
     
     #ells = plt.imread(path_ells)
-    ells = path_ells
     img = cv.imread(path_image)
     #gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
     #ret, thresh = cv.threshold(gray,0,255,cv.THRESH_BINARY_INV+cv.THRESH_OTSU)
     
     # noise removal
     kernel = np.ones((3,3),np.uint8)
-    opening = cv.morphologyEx(ells,cv.MORPH_OPEN,kernel, iterations = 2)
+    opening = cv.morphologyEx(path_ells,cv.MORPH_OPEN,kernel, iterations = 2)
 
     # sure background area
     sure_bg = cv.dilate(opening,kernel,iterations=it)
@@ -49,10 +46,10 @@ def Make_markers(path_image,path_ells,path_ells_érodées,path_output,it):
     # Now, mark the region of unknown with zero
     markers[unknown==1] = 0
     
-    plt.imshow(img,cmap=plt.cm.gray)
-    plt.imshow(markers, cmap=plt.cm.nipy_spectral, alpha=.7)
-    plt.savefig(f"{path_output}/Markers.png")
-    plt.close()
+    # plt.imshow(img,cmap=plt.cm.gray)
+    # plt.imshow(markers, cmap=plt.cm.nipy_spectral, alpha=.7)
+    # plt.savefig(f"{path_output}/Markers.png")
+    # plt.close()
     
     return markers
 
@@ -71,7 +68,7 @@ def Seg_Water_meth1(path_image,path_ells,path_ells_érodées,path_output,it):
     markers = cv.watershed(img,markers)
     img[markers == -1] = [255,0,0]
     
-    io.imwrite(f"{path_output}/Markers_méthode_1.png",img)
+    # io.imwrite(f"{path_output}/Markers_méthode_1.png",img)
     
     # plt.imshow(img)
     # plt.show()
@@ -97,37 +94,37 @@ def Seq_Water_meth2(path_image,path_ells,path_ells_érodées,path_output,it):
     labels = watershed(gradient, markers)
 
     # display results
-    fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(8, 8),
-                            sharex=True, sharey=True)
-    ax = axes.ravel()
+    # fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(8, 8),
+    #                         sharex=True, sharey=True)
+    # ax = axes.ravel()
 
-    ax[0].imshow(image, cmap=plt.cm.gray)
-    ax[0].set_title("Original")
+    # ax[0].imshow(image, cmap=plt.cm.gray)
+    # ax[0].set_title("Original")
 
-    ax[1].imshow(gradient, cmap=plt.cm.nipy_spectral)
-    ax[1].set_title("Local Gradient")
+    # ax[1].imshow(gradient, cmap=plt.cm.nipy_spectral)
+    # ax[1].set_title("Local Gradient")
 
-    ax[2].imshow(markers, cmap=plt.cm.nipy_spectral)
-    ax[2].set_title("Markers")
+    # ax[2].imshow(markers, cmap=plt.cm.nipy_spectral)
+    # ax[2].set_title("Markers")
 
-    ax[3].imshow(image, cmap=plt.cm.gray)
-    ax[3].imshow(labels, cmap=plt.cm.nipy_spectral, alpha=.7)
-    ax[3].set_title("Segmented")
+    # ax[3].imshow(image, cmap=plt.cm.gray)
+    # ax[3].imshow(labels, cmap=plt.cm.nipy_spectral, alpha=.7)
+    # ax[3].set_title("Segmented")
 
-    for a in ax:
-        a.axis('off')
+    # for a in ax:
+    #     a.axis('off')
     
-    fig.tight_layout()
-    plt.savefig(f"{path_output}/All_méthode_2.png")
-    plt.close()
+    # fig.tight_layout()
+    # plt.savefig(f"{path_output}/All_méthode_2.png")
+    # plt.close()
     
     plt.imshow(image, cmap=plt.cm.gray)
     plt.imshow(labels, cmap=plt.cm.nipy_spectral, alpha=.7)
-    plt.savefig(f"{path_output}/Segmentation_méthode_2.png")
+    plt.savefig(f"{path_output}/Watershed_segmentation.png")
     plt.close()
     labels_norm = cv.normalize(labels, np.zeros(labels.shape),0, 255, cv.NORM_MINMAX)
     labels = np.uint8(labels_norm)
-    io.imwrite(path_output + "/Labels_méthode_2.png",labels)
+    io.imwrite(path_output + "/Watershed_labels.png",labels)
     
     
     return labels

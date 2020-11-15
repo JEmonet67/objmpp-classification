@@ -2,7 +2,7 @@ import click
 import logging
 import sys
 
-from objmpp_classification.organoid_classification import *
+from objmpp_classification.main import main
 
 @click.group()
 def cli():
@@ -15,7 +15,7 @@ def cli():
 @click.argument('path_images')
 @click.option('--debug', is_flag=True, help="Will print debug messages.")
 def organoid(path_data, path_images, debug=False):
-    organoid_classification(path_data, path_images, debug)
+    main(path_data, path_images, debug)
 
 cli.add_command(organoid)
 
