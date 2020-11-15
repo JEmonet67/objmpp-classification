@@ -1,5 +1,6 @@
 import numpy as np
 from decimal import Decimal
+from progress.bar import Bar
 
 def level_list_creation(img,i_obj,k):
     max_x = np.max(img.list_distmap[i_obj-1])
@@ -12,10 +13,11 @@ def level_list_creation(img,i_obj,k):
     return list_niveau
 
 
-def count_and_sum_level(obj,list_niveau,k):
+def count_and_sum_level(obj,list_niveau,k,bar):
     list_sum = [0] * k
     list_count = [0] * k
     for i in range(0,obj.local_distmap.shape[0]):
+        bar.next()
         for j in range(0,obj.local_distmap.shape[1]):
             value_distmap = round(obj.local_distmap[i,j],5)
             if value_distmap > 0:

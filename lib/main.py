@@ -38,8 +38,6 @@ def main(path_data, path_images, debug=False):
 			name_img = re.sub(regexp_name,r'\1.\2',name_img)
 
 			#Récupération des chemins requis pour la suite.
-			#Vérification des fichiers.
-			#Ajouter des blocs if/raise pour chaque élément afin de vérifier qu'ils existent et sinon envoyer une erreur explicite.
 			list_files_id = [files for files in listdir(path_img_folder) if id_image in files]
 			for files_id in list_files_id:
 				if "region" in files_id:
@@ -72,17 +70,17 @@ def main(path_data, path_images, debug=False):
 			#Transformation des objets en map des distance.
 			img.list_distmap = Distance_map(img.list_reg_watersh)
 			
-			print("Début de l'algorithme de classification.")
+			print("Calcul des paramètres et classification de chaque objets.")
 			#Classification des organoïdes.
 			compact,cystic,waste = local_map_iterations(img,path_img_folder,path_csv,path_img,20)
 			
-			# print("Ajout des statistiques des organoides à la liste totale.")
+			print("Ajout des statistiques des objets à la liste totale.")
 			#Somme global de toutes les images.
 			total_compact.add_GroupObjImage(compact)
 			total_cystic.add_GroupObjImage(cystic)
 			total_waste.add_GroupObjImage(waste)
 
-   
+			print("Ecriture des fichiers objets")
 			#Ecriture fichiers objets.
 			Path(path_img_folder+"/Objects").mkdir(parents=True, exist_ok=True)
 			save_obj(img,path_img_folder+"/Objects/img")
@@ -90,21 +88,12 @@ def main(path_data, path_images, debug=False):
 			save_obj(total_compact,path_img_folder+"/Objects/total_cystic")
 			save_obj(total_compact,path_img_folder+"/Objects/total_waste")
 
-	
-	#Calcul des statistiques globales.
+	print("Mise en place des statistiques globales")
+	#Calcul et écriture des statistiques globales.
 	dict_mean, dict_std = make_mean_std(total_compact,total_cystic,total_waste)
- 
- 	# #Mise en place du excel global.
 	excel_writing(dict_mean, dict_std, total_compact, total_cystic, total_waste, path_data)
 
 
-   
 
-			
-			
-	    
-# path_data_t = "/home/jerome/Bureau/New_GFP"
-# path_images_t = "/mnt/Shared Data/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
-# main(path_data_t,path_images_t)
 
 	    
