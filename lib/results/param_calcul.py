@@ -1,5 +1,5 @@
 from decimal import Decimal
-from objmpp_classification.processing.intensity_profiling import frange
+from lib.processing.intensity_profiling import frange
 import numpy as np
 import cv2 as cv
 

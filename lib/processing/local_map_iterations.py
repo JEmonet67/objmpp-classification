@@ -7,13 +7,13 @@ from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-whitegrid")
-from objmpp_classification.objects.GroupObj import *
-from objmpp_classification.results.graph import *
-from objmpp_classification.processing.intensity_profiling import *
-from objmpp_classification.results.param_calcul import *
-from objmpp_classification.processing.classif import classif
-from objmpp_classification.results.output_image import *
-from objmpp_classification.results.statistics import *
+from lib.objects.GroupObj import *
+from lib.results.graph import *
+from lib.processing.intensity_profiling import *
+from lib.results.param_calcul import *
+from lib.processing.classif import classif
+from lib.results.output_image import *
+from lib.results.statistics import *
 from decimal import Decimal
 
 

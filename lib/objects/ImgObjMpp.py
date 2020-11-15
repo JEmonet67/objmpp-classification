@@ -1,5 +1,5 @@
-from objmpp_classification.objects.Point import Point
-from objmpp_classification.objects.Organoid import Organoid
+from lib.objects.Point import Point
+from lib.objects.Organoid import Organoid
 import numpy as np
 import pandas as pd
 from PIL import Image
