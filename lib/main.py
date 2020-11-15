@@ -1,9 +1,9 @@
 """Written by Jérôme Emonet"""
 
-from objmpp_classification.segmentation.seg_orga_watershed import *
-from objmpp_classification.processing.local_map_iterations import *
-from objmpp_classification.segmentation.traitements_objet import *
-from objmpp_classification.objects.ImgObjMpp import ImgObjMpp
+from lib.segmentation.seg_orga_watershed import *
+from lib.processing.local_map_iterations import *
+from lib.segmentation.traitements_objet import *
+from lib.objects.ImgObjMpp import ImgObjMpp
 from os import listdir
 from os.path import splitext
 from pathlib import Path
