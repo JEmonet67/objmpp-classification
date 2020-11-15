@@ -78,11 +78,10 @@ def main(path_data, path_images, debug=False):
 			
 			# print("Ajout des statistiques des organoides à la liste totale.")
 			#Somme global de toutes les images.
-			#print(f"TAAAIIIILLLE APRES {compact.tailles}")
 			total_compact.add_GroupObjImage(compact)
 			total_cystic.add_GroupObjImage(cystic)
 			total_waste.add_GroupObjImage(waste)
-			#print(f"TAIIIILLLE AVANT {total_compact.tailles}")
+
    
 			#Ecriture fichiers objets.
 			Path(path_img_folder+"/Objects").mkdir(parents=True, exist_ok=True)

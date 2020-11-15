@@ -9,14 +9,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    version='0.0.5',
+    version='0.0.6',
     name='objmpp-classification',
     license='MIT License',
     description='Package to enhance segmentation and perform classification from obj.MPP output',
     author='Jérôme Emonet',
     author_email='jerome.emonet.67@gmail.com',
     url='https://github.com/JEmonet67/objmpp-classification',
-    packages=find_packages(include=['objmpp_classification']),
+    packages=find_packages(include=['lib']),
     package_dir={'': 'lib'},
     entry_points={
         'console_scripts': [
