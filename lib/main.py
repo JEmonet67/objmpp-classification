@@ -99,5 +99,13 @@ def main(path_data, path_images, debug=False):
 	excel_writing(dict_mean, dict_std, total_compact, total_cystic, total_waste, path_data)
 
 
+   
+
+			
+			
+	    
+# path_data_t = "/home/jerome/Bureau/New_GFP"
+# path_images_t = "/mnt/Shared Data/Stage_Classif_Organoid/Image_Organoïdes/07012020-UBTD1-video"
+# main(path_data_t,path_images_t)
 
 	    

@@ -1,7 +1,9 @@
-from objmpp_classification.objets.ObjetMpp import ObjetMpp
+from objmpp_classification.objects.ObjetMpp import ObjetMpp
 
 class Organoid(ObjetMpp):
     def __init__(self,center,major_axis):
         ObjetMpp.__init__(self,center,major_axis)
+        self.type = "Organoid"
+        self.subtype = ""
         
 
