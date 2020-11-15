@@ -9,7 +9,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    version='0.1.0',
+    version='0.1.1',
     name='objmpp-classification',
     license='MIT License',
     description='Package to enhance segmentation and perform classification from obj.MPP output',
